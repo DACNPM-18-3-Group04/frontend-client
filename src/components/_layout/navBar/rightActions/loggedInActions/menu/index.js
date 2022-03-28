@@ -1,4 +1,5 @@
 import { Menu, MenuItem, Button } from '@mui/material';
+import { Link } from 'react-router-dom';
 import SignOutButton from '../../../../../_common/signOutButton';
 
 export default function LoggedInMenu({
@@ -30,7 +31,12 @@ export default function LoggedInMenu({
           Tin rao của tôi
         </Button>
       </MenuItem>
-      <MenuItem>Thông tin cá nhân</MenuItem>
+      <Link
+        to='/user/me'
+        style={{ color: 'inherit', textDecoration: 'inherit' }}
+      >
+        <MenuItem>Thông tin cá nhân</MenuItem>
+      </Link>
       <SignOutButton />
     </Menu>
   );

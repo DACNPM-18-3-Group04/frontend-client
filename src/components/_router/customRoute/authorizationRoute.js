@@ -1,6 +1,6 @@
 import { Route, Redirect } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { selectUser } from '../../../../redux/slices/user';
+import { selectUser } from '../../../redux/slices/user';
 
 export default function AuthorizationRoute({
   path,

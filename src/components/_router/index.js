@@ -6,6 +6,8 @@ import { Route, Switch } from 'react-router-dom';
 import NotFoundPage from '../_pages/notfound';
 import Home from '../_pages/home';
 import AccountActivationPage from '../_pages/activation';
+import UserInfo from '../_pages/userinfo';
+import AuthorizationRoute from './customRoute/authorizationRoute';
 
 // Pages
 
@@ -20,6 +22,11 @@ function Router() {
       </Route>
       <Route exact path='/user/activation'>
         <AccountActivationPage />
+      </Route>
+      <Route exact path='/user/me'>
+        <AuthorizationRoute>
+          <UserInfo />
+        </AuthorizationRoute>
       </Route>
       <Route>
         <NotFoundPage />
