@@ -31,12 +31,7 @@ export default function LoggedInMenu({
           Tin rao của tôi
         </Button>
       </MenuItem>
-      <Link
-        to='/user/me'
-        style={{ color: 'inherit', textDecoration: 'inherit' }}
-      >
-        <MenuItem>Thông tin cá nhân</MenuItem>
-      </Link>
+      <MenuItem component={Link} to='/user/me'>Thông tin cá nhân</MenuItem>
       <SignOutButton />
     </Menu>
   );
