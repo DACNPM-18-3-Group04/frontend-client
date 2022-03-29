@@ -28,6 +28,7 @@ export const UserSlice = createSlice({
       if (contact_number !== undefined) state.contact_number = contact_number;
       if (token !== undefined) state.token = token;
       if (id !== undefined) state.isLogin = true;
+      localStorage.setItem(USER_INFO_CACHE_NAME, JSON.stringify({ ...state }));
     },
     signIn: (state, action) => {
       const { id, fullname, contact_email, contact_number, avatar, token } =
