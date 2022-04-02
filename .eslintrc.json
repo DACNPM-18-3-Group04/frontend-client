@@ -20,20 +20,6 @@
   "rules": {
     "react/react-in-jsx-scope": "off",
     "react/prop-types": 0,
-    "prettier/prettier": [
-      "warn",
-      {
-        "arrowParens": "always",
-        "singleQuote": true,
-        "jsxSingleQuote": true,
-        "bracketSpacing": true,
-        "tabWidth": 2,
-        "useTabs": false,
-        "semi": true,
-        "printWidth": 80,
-        "trailingComma": "all",
-        "endOfLine": "crlf"
-      }
-    ]
+    "prettier/prettier": 1
   }
 }
