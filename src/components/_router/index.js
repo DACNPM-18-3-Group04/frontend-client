@@ -7,6 +7,7 @@ import NotFoundPage from '../_pages/notfound';
 import Home from '../_pages/home';
 import AccountActivationPage from '../_pages/activation';
 import UserInfo from '../_pages/userinfo';
+import PropertySingle from '../_pages/propertySingle';
 import AuthorizationRoute from './customRoute/authorizationRoute';
 
 // Pages
@@ -27,6 +28,9 @@ function Router() {
         <AuthorizationRoute>
           <UserInfo />
         </AuthorizationRoute>
+      </Route>
+      <Route exact path='/property_test'>
+        <PropertySingle />
       </Route>
       <Route>
         <NotFoundPage />
