@@ -8,6 +8,7 @@ import Home from '../_pages/home';
 import AccountActivationPage from '../_pages/activation';
 import UserInfo from '../_pages/userinfo';
 import AuthorizationRoute from './customRoute/authorizationRoute';
+import CreateProperty from '../_pages/propertySingle/createProperty';
 
 // Pages
 
@@ -27,6 +28,9 @@ function Router() {
         <AuthorizationRoute>
           <UserInfo />
         </AuthorizationRoute>
+      </Route>
+      <Route exact path='/property/create'>
+        <CreateProperty/>
       </Route>
       <Route>
         <NotFoundPage />
