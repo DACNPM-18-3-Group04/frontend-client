@@ -29,7 +29,7 @@ function Router() {
           <UserInfo />
         </AuthorizationRoute>
       </Route>
-      <Route exact path='/property_test'>
+      <Route exact path='/info/:id'>
         <PropertySingle />
       </Route>
       <Route>

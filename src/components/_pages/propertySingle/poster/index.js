@@ -25,7 +25,9 @@ export default function PropertyPoster({
   avatar,
   account_type,
   rating,
+  handleRatingChange,
   rating_accumulator,
+  handleSendReview,
   sx,
 }) {
   return (
@@ -88,7 +90,11 @@ export default function PropertyPoster({
         </Button>
       </Box>
 
-      <PropertyReview />
+      <PropertyReview
+        rating={rating}
+        handleRatingChange={handleRatingChange}
+        handleSendReview={handleSendReview}
+      />
     </Box>
   );
 }

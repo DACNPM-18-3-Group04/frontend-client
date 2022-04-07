@@ -13,9 +13,9 @@ import './styles.css';
 import { FreeMode, Navigation, Thumbs } from 'swiper';
 import { Box } from '@mui/material';
 
-export default function ThumbSlider({ sx }) {
+export default function ThumbSlider({ sx, imgs }) {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
-  
+
   return (
     <Box sx={{ ...sx }}>
       <Swiper
@@ -31,12 +31,20 @@ export default function ThumbSlider({ sx }) {
         modules={[FreeMode, Navigation, Thumbs]}
         className='mySwiper2'
       >
-        <SwiperSlide>
-          <img src='https://swiperjs.com/demos/images/nature-1.jpg' />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src='https://swiperjs.com/demos/images/nature-10.jpg' />
-        </SwiperSlide>
+        {imgs?.length > 0 ? (
+          imgs.map((img) => (
+            <SwiperSlide key={img.id}>
+              <img alt={img.id} src={img.ImageLink} />
+            </SwiperSlide>
+          ))
+        ) : (
+          <SwiperSlide>
+            <img
+              alt='not available'
+              src='https://upload.wikimedia.org/wikipedia/commons/d/d1/Image_not_available.png'
+            />
+          </SwiperSlide>
+        )}
       </Swiper>
       <Swiper
         onSwiper={setThumbsSwiper}
@@ -47,12 +55,20 @@ export default function ThumbSlider({ sx }) {
         modules={[FreeMode, Navigation, Thumbs]}
         className='mySwiper'
       >
-        <SwiperSlide>
-          <img src='https://swiperjs.com/demos/images/nature-1.jpg' />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src='https://swiperjs.com/demos/images/nature-10.jpg' />
-        </SwiperSlide>
+        {imgs?.length > 0 ? (
+          imgs.map((img) => (
+            <SwiperSlide key={img.id}>
+              <img alt={img.id} src={img.ImageLink} />
+            </SwiperSlide>
+          ))
+        ) : (
+          <SwiperSlide>
+            <img
+              alt='not available'
+              src='https://upload.wikimedia.org/wikipedia/commons/d/d1/Image_not_available.png'
+            />
+          </SwiperSlide>
+        )}
       </Swiper>
     </Box>
   );
