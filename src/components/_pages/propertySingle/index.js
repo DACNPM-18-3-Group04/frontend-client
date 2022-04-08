@@ -1,6 +1,3 @@
-
-export default function Property(){
-    return (
-        <>list</>
-    )
+export default function Property() {
+  return <>list</>;
 }
