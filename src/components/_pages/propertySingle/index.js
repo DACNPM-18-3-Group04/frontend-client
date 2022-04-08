@@ -1,3 +1,4 @@
+/* eslint-disable react/no-children-prop */
 import { Box, Card, Container, Grid } from '@mui/material';
 import PropertyPoster from './poster';
 import PropertyDetail from './details';
