@@ -33,6 +33,10 @@ export const handleSendReview = (feedback) => {
   return api.post(`${baseURL}/review`, { feedback }, getAuthConfig());
 };
 
+export const createProperty = async (propertyInfo) => {
+    return api.post(`${baseURL}/`, propertyInfo)
+}
+
 const PropertyAPI = {
   getPropertyInfo,
   getImgLinks,
@@ -40,6 +44,7 @@ const PropertyAPI = {
   getContactInfo,
   handleRatingProperty,
   handleSendReview,
+  createProperty,
 };
 
 export default PropertyAPI;

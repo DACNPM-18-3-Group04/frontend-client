@@ -9,6 +9,7 @@ import AccountActivationPage from '../_pages/activation';
 import UserInfo from '../_pages/userinfo';
 import PropertySingle from '../_pages/propertySingle';
 import AuthorizationRoute from './customRoute/authorizationRoute';
+import PropertyCreatePage from '../_pages/propertyCreate';
 
 // Pages
 
@@ -28,6 +29,9 @@ function Router() {
         <AuthorizationRoute>
           <UserInfo />
         </AuthorizationRoute>
+      </Route>
+      <Route exact path='/property/create'>
+        <PropertyCreatePage />
       </Route>
       <Route exact path='/info/:id'>
         <PropertySingle />
