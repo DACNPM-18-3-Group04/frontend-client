@@ -7,6 +7,7 @@ import NotFoundPage from '../_pages/notfound';
 import Home from '../_pages/home';
 import AccountActivationPage from '../_pages/activation';
 import UserInfo from '../_pages/userinfo';
+import PropertySingle from '../_pages/propertySingle';
 import AuthorizationRoute from './customRoute/authorizationRoute';
 import PropertyCreatePage from '../_pages/propertyCreate';
 
@@ -31,6 +32,9 @@ function Router() {
       </Route>
       <Route exact path='/property/create'>
         <PropertyCreatePage />
+      </Route>
+      <Route exact path='/info/:id'>
+        <PropertySingle />
       </Route>
       <Route>
         <NotFoundPage />
