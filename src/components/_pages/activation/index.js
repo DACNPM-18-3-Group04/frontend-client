@@ -1,11 +1,5 @@
 import { useState, useEffect } from 'react';
-import {
-  Container,
-  Grid,
-  Box,
-  Typography,
-  Button,
-} from '@mui/material';
+import { Container, Grid, Box, Typography, Button } from '@mui/material';
 import { Link, useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
@@ -27,35 +21,30 @@ export default function AccountActivationPage() {
     setIsLoading(true);
     setError(null);
     UserAPI.handleActivation(activation_id)
-    .then(() => {
-      toast.success('Kích hoạt tài khoản thành công')
-      history.push('/');
-    })
-    .catch((err) => {
-      setError(err);
-    })
-    .finally(() => {
-      setIsLoading(false);
-    })
-    
-  }, [activation_id, history])
+      .then(() => {
+        toast.success('Kích hoạt tài khoản thành công');
+        history.push('/');
+      })
+      .catch((err) => {
+        setError(err);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  }, [activation_id, history]);
 
   if (isLoading) {
-    return <Loader label='Kích hoạt tài khoản...'/>;
+    return <Loader label='Kích hoạt tài khoản...' />;
   }
 
   if (error) {
     return (
       <ErrorPage message={getErrorMessage(error)} backToHome={false}>
-        <Button 
-          variant='contained'
-          component={Link}
-          to='/'
-        >
+        <Button variant='contained' component={Link} to='/'>
           Về trang chủ
         </Button>
       </ErrorPage>
-    )
+    );
   }
 
   return (
@@ -66,17 +55,13 @@ export default function AccountActivationPage() {
         direction='column'
         alignItems='center'
         justifyContent='center'
-        style={{ minHeight: '80vh' /* Layout height */}}
+        style={{ minHeight: '80vh' /* Layout height */ }}
       >
         <Grid item xs={3}>
-          <Box sx={{width: '300px'}}>
+          <Box sx={{ width: '300px' }}>
             <Typography>Kích hoạt tài khoản thành công</Typography>
             <Box mt={2}>
-              <Button 
-                variant='contained'
-                component={Link}
-                to='/'
-              >
+              <Button variant='contained' component={Link} to='/'>
                 Về trang chủ &#38; Đăng nhập
               </Button>
             </Box>
@@ -84,5 +69,5 @@ export default function AccountActivationPage() {
         </Grid>
       </Grid>
     </Container>
-  )
+  );
 }

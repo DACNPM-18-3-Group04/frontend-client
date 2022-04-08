@@ -3,7 +3,7 @@ export const getErrorMessage = (error = {}) => {
   if (error.response) {
     if (error.response.data) {
       // Server has responsed
-      errorMessage = error.response.data.message
+      errorMessage = error.response.data.message;
       errorMessage += `(${error.response.status})`;
     } else {
       // Cannot contact server
@@ -15,7 +15,7 @@ export const getErrorMessage = (error = {}) => {
     errorMessage = error.message;
   }
   return errorMessage;
-}
+};
 
 export const isErrorResponse = (response) => {
   if (!response.data) {
@@ -25,15 +25,15 @@ export const isErrorResponse = (response) => {
 
   if (!response.data.success) {
     // Response is not success
-    return true
+    return true;
   }
 
   return false; // Is not an error repsonse
-}
+};
 
 const ErrorResponseHelpers = {
   getErrorMessage,
   isErrorResponse,
-}
+};
 
 export default ErrorResponseHelpers;

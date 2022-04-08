@@ -31,7 +31,9 @@ export default function LoggedInMenu({
           Tin rao của tôi
         </Button>
       </MenuItem>
-      <MenuItem component={Link} to='/user/me'>Thông tin cá nhân</MenuItem>
+      <MenuItem component={Link} to='/user/me'>
+        Thông tin cá nhân
+      </MenuItem>
       <SignOutButton />
     </Menu>
   );

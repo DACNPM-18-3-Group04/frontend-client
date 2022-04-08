@@ -121,7 +121,7 @@ export default function Credentials({ email, fullname, onEmailChange }) {
         </Box>
 
         <Box sx={rowStyle}>
-          <Typography noWrap  flex={2} fontWeight='bold' sx={cellStyle}>
+          <Typography noWrap flex={2} fontWeight='bold' sx={cellStyle}>
             Họ tên
           </Typography>
           <Box flex={8} sx={cellStyle}>
