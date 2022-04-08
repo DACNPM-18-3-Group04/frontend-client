@@ -11,25 +11,11 @@ import {
   Button,
 } from '@mui/material';
 import { useState } from 'react';
-import { makeStyles } from '@material-ui/core';
 import { toast } from 'react-toastify';
 import PropertyAPI from '../../../helpers/api/property';
 import { useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { selectUser } from '../../../redux/slices/user';
-
-const useStyles = makeStyles({
-  form: {
-    padding: '20px',
-    margin: '80px',
-    border: 'solid 1px black',
-    borderRadius: '8px',
-    backgroundColor: 'white',
-  },
-  formElement: {
-    margin: '10px 0px',
-  },
-});
 
 export default function CreateProperty() {
   const user = useSelector(selectUser);
@@ -59,7 +45,7 @@ export default function CreateProperty() {
       name: 'Quận 6',
     },
   ];
-  const classes = useStyles();
+  //   const classes = useStyles();
   const history = useHistory();
 
   const [title, setTitle] = useState('');
@@ -96,13 +82,13 @@ export default function CreateProperty() {
   if (user && user.isLogin) {
     return (
       <>
-        <form onSubmit={handleSubmit} className={classes.form}>
+        <form onSubmit={handleSubmit}>
           <TextField
             label='Tên'
             variant='outlined'
             required
             fullWidth
-            className={classes.formElement}
+            margin='normal'
             onChange={(e) => setTitle(e.target.value)}
           />
           <TextField
@@ -110,7 +96,7 @@ export default function CreateProperty() {
             variant='outlined'
             required
             fullWidth
-            className={classes.formElement}
+            margin='normal'
             onChange={(e) => setDescription(e.target.value)}
           />
           <TextField
@@ -119,7 +105,7 @@ export default function CreateProperty() {
             type='number'
             required
             fullWidth
-            className={classes.formElement}
+            margin='normal'
             onChange={(e) => setArea(e.target.value)}
           />
           <TextField
@@ -127,11 +113,11 @@ export default function CreateProperty() {
             variant='outlined'
             type='number'
             required
-            className={classes.formElement}
+            margin='normal'
             onChange={(e) => setPrice(e.target.value)}
           />
 
-          <FormControl fullWidth className={classes.formElement}>
+          <FormControl fullWidth margin='normal'>
             <FormLabel id='property-type'>Loại</FormLabel>
             <RadioGroup
               aria-labelledby='property-type'
@@ -150,10 +136,11 @@ export default function CreateProperty() {
             variant='outlined'
             required
             fullWidth
-            className={classes.formElement}
+            margin='normal'
             onChange={(e) => setAddress(e.target.value)}
           />
-          <FormControl fullWidth className={classes.formElement}>
+          <FormControl fullWidth margin='normal'>
+            {/* className={classes.formElement}> */}
             <InputLabel id='property-disctrict'>Quận</InputLabel>
             <Select
               aria-labelledby='property-disctrict'
