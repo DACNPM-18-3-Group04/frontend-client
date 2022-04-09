@@ -5,5 +5,6 @@ export const handleFailure = (err) => {
   if (err.response && err.response.data) {
     message = err.response.data.message;
   }
+  console.log(err);
   toast.error(message);
 };

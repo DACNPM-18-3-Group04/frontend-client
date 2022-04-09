@@ -54,7 +54,7 @@ export default function SignUpForm({ onSuccess = () => {} }) {
     const values = {
       ...formValues,
     };
-    console.log(values);
+    // console.log(values);
     setFormStates({ ...formStates, isSubmitting: true });
     handleSignUp(values)
       .then(() => {
@@ -171,10 +171,10 @@ export default function SignUpForm({ onSuccess = () => {} }) {
         id='contact_number'
         name='contact_number'
         label='Số điện thoại'
-        value={formik.values.full_name}
+        value={formik.values.contact_number}
         onChange={formik.handleChange}
-        error={Boolean(formik.errors.full_name)}
-        helperText={formik.errors.full_name}
+        error={Boolean(formik.errors.contact_number)}
+        helperText={formik.errors.contact_number}
       />
       <Button
         disabled={formStates.isSubmitting}

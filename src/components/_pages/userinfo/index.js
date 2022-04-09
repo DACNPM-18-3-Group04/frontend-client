@@ -1,4 +1,4 @@
-import { Avatar, Card, Container, IconButton, Typography } from '@mui/material';
+import { Card, Container, IconButton, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
@@ -8,6 +8,8 @@ import { selectUser } from '../../../redux/slices/user';
 import AccountInfo from './password';
 import Contacts from './contacts';
 import Credentials from './credentials';
+
+import Avatar from './avatar';
 import { title } from './customStyle';
 
 export default function UserInfo() {
@@ -37,14 +39,7 @@ export default function UserInfo() {
 
           <Box sx={{ maxWidth: '80%', my: 2, mx: 'auto' }}>
             <Box sx={{ display: 'flex' }}>
-              <IconButton>
-                <Avatar alt={fullname} src={avatar}>
-                  {fullname ? fullname.charAt(0) : null}
-                </Avatar>
-              </IconButton>
-              <Typography marginLeft='.5rem' variant='h6' alignSelf='center'>
-                {fullname}
-              </Typography>
+              <Avatar fullname={fullname} avatar={avatar}></Avatar>
             </Box>
 
             <Box my={2}>
