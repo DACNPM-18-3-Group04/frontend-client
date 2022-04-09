@@ -10,7 +10,6 @@ export default function FetchPropertyLocation() {
   useEffect(() => {
     UtilAPI.getPropertyLocations()
       .then((res) => {
-        console.log(res.data);
         dispatch(updateLocationInfo(res.data.data));
       })
       .catch((err) => {

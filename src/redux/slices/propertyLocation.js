@@ -35,5 +35,5 @@ export const PropertyLocationSlice = createSlice({
 
 export const { updateLocationInfo } = PropertyLocationSlice.actions;
 export const PropertyLocationReducer = PropertyLocationSlice.reducer;
-export const selectDistricts = (state) => state.districts;
+export const selectPropertyLocation = (state) => state.propertyLocation;
 export default PropertyLocationReducer;
