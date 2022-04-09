@@ -164,13 +164,13 @@ export default function SearchForm() {
             />
           </Grid>
         </Grid>
-        <Grid item container md={3} xs={12} spacing={1}>
+        <Grid item container md={4} xs={12} spacing={1}>
           <Grid item xs={6}>
             <TextField
               fullWidth
               id='minArea'
               name='minArea'
-              label='Diện tích thấp nhất'
+              label='Diện tích thấp nhất (m2)'
               margin='dense'
               type='number'
               value={formik.values.minArea}
@@ -184,7 +184,7 @@ export default function SearchForm() {
               fullWidth
               id='maxArea'
               name='maxArea'
-              label='Diện tích lớn nhất'
+              label='Diện tích lớn nhất (m2)'
               margin='dense'
               type='number'
               value={formik.values.maxArea}
