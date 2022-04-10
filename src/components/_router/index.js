@@ -10,6 +10,7 @@ import UserInfo from '../_pages/userinfo';
 import PropertySingle from '../_pages/propertySingle';
 import AuthorizationRoute from './customRoute/authorizationRoute';
 import PropertyCreatePage from '../_pages/propertyCreate';
+import PropertySearchPage from '../_pages/search';
 
 // Pages
 
@@ -29,6 +30,9 @@ function Router() {
         <AuthorizationRoute>
           <UserInfo />
         </AuthorizationRoute>
+      </Route>
+      <Route exact path='/properties'>
+        <PropertySearchPage />
       </Route>
       <Route exact path='/property/create'>
         <PropertyCreatePage />
