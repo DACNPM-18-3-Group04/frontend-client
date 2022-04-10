@@ -36,7 +36,7 @@ export const handleSendReview = (feedback) => {
 };
 
 export const createProperty = async (propertyInfo) => {
-  return api.post(`${baseURL}/`, propertyInfo);
+  return api.post(`${baseURL}/`, propertyInfo, getAuthConfig());
 };
 
 const PropertyAPI = {

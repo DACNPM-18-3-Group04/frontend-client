@@ -15,7 +15,6 @@ export const searchProperty = (limit = 5, page = 0, query = {}) => {
   }
 
   const queryStr = keyValArr.join('&');
-  console.log(queryStr);
   const endpoint = `/property/search?${queryStr}`;
   return api.get(endpoint);
 };

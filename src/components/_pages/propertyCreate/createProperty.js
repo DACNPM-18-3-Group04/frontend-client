@@ -17,6 +17,7 @@ import { selectPropertyLocation } from '../../../redux/slices/propertyLocation';
 import * as yup from 'yup';
 import { useFormik } from 'formik';
 import PropertyTypes from '../../../helpers/constants/propertyTypes';
+import formatErrorResponse from '../../../helpers/utils/formatErrorResponse';
 
 const validationSchema = yup.object({
   title: yup
@@ -44,14 +45,14 @@ export default function CreateProperty() {
 
   const handleSubmit = (values) => {
     setLoading(true);
-    console.log('Submitting');
     PropertyAPI.createProperty(values)
       .then(() => {
         toast.success('Đăng thành công');
         history.push('/');
       })
       .catch((err) => {
-        toast.error(err.message);
+        let res = formatErrorResponse(err);
+        toast.error(res.message);
         setLoading(false);
       });
   };
@@ -74,11 +75,6 @@ export default function CreateProperty() {
     return (
       <>
         <form onSubmit={formik.handleSubmit}>
-          {/* // onSubmit={(e) => {
-          //   e.preventDefault();
-          //   console.log(formik.values);
-          // }}
-        // > */}
           <Grid container spacing={1}>
             <Grid item xs={12}>
               <TextField
