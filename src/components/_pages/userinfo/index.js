@@ -8,8 +8,8 @@ import { selectUser } from '../../../redux/slices/user';
 import AccountInfo from './password';
 import Contacts from './contacts';
 import Credentials from './credentials';
-
 import Avatar from './avatar';
+
 import { title } from './customStyle';
 
 export default function UserInfo() {

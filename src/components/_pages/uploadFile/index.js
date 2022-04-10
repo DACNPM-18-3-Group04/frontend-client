@@ -1,56 +1,49 @@
-import https from '../../../helpers/api/index';
+import UploadFileAPI from '../../../helpers/api/uploadFile/index';
 
-import React, { Component } from 'react';
-import { Container } from '@mui/material';
+import React, { Component, useState } from 'react';
+import { Container, Dialog } from '@mui/material';
+import { DialogProps } from '@mui/material/Dialog';
 
-class App extends Component {
-  state = {
-    // Initially, no file is selected
-    selectedFile: null,
+function UploadFile(props) {
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [fullWidth, setFullWidth] = useState(true);
+  const [maxWidth, setMaxWidth] = useState('sm')
+
+  const handleMaxWidthChange = (event) => {
+    setMaxWidth(
+      event.target.value,
+    );
   };
 
-  // On file select (from the pop up)
-  onFileChange = (event) => {
-    // Update the state
-    this.setState({ selectedFile: event.target.files[0] });
+  const handleClose = () => {};
+
+  const handleFullWidthChange = (event) => {
+    setFullWidth(event.target.checked);
   };
 
-  // On file upload (click the upload button)
-  onFileUpload = () => {
-    // Create an object of formData
+  const onFileChange = (event) => {
+    setSelectedFile(event.target.files[0]);
+  };
+
+  const onFileUpload = () => {
     const formData = new FormData();
 
-    // Update the formData object
-    formData.append(
-      'file',
-      this.state.selectedFile,
-      //   this.state.selectedFile.name,
-    );
-
-    // Details of the uploaded file
-    console.log(this.state.selectedFile);
-
-    // Request made to the backend api
-    // Send formData object
-    https.post('/uploadfile', formData);
+    formData.append('file', selectedFile);
+    formData.append('action','upload-avatar')
+    UploadFileAPI.uploadFile(formData);
   };
 
-  // File content to be displayed after
-  // file upload is complete
-  fileData = () => {
-    if (this.state.selectedFile) {
+  const fileData = () => {
+    if (selectedFile) {
       return (
         <div>
           <h2>File Details:</h2>
 
-          <p>File Name: {this.state.selectedFile.name}</p>
+          <p>File Name: {selectedFile.name}</p>
 
-          <p>File Type: {this.state.selectedFile.type}</p>
+          <p>File Type: {selectedFile.type}</p>
 
-          <p>
-            Last Modified:{' '}
-            {this.state.selectedFile.lastModifiedDate.toDateString()}
-          </p>
+          <p>Last Modified: {selectedFile.lastModifiedDate.toDateString()}</p>
         </div>
       );
     } else {
@@ -63,20 +56,23 @@ class App extends Component {
     }
   };
 
-  render() {
-    return (
-      <Container>
+  return (
+    <Dialog
+      open={props.open}
+      fullWidth={fullWidth}
+      maxWidth={maxWidth}
+      onClose={handleClose}
+    >
+      <div>
+        <h3>File Upload</h3>
         <div>
-          <h3>File Upload</h3>
-          <div>
-            <input type='file' onChange={this.onFileChange} />
-            <button onClick={this.onFileUpload}>Upload!</button>
-          </div>
-          {this.fileData()}
+          <input type='file' onChange={onFileChange} />
+          <button onClick={onFileUpload}>Upload!</button>
         </div>
-      </Container>
-    );
-  }
+        {fileData()}
+      </div>
+    </Dialog>
+  );
 }
 
-export default App;
+export default UploadFile;
