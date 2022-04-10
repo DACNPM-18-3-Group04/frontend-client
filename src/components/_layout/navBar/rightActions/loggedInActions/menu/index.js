@@ -22,7 +22,12 @@ export default function LoggedInMenu({
       }}
     >
       <MenuItem>
-        <Button fullWidth variant='contained'>
+        <Button
+          fullWidth
+          variant='contained'
+          component={Link}
+          to='property/create'
+        >
           Đăng tin rao
         </Button>
       </MenuItem>

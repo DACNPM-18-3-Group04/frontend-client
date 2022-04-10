@@ -160,10 +160,10 @@ export default function SignUpForm({ onSuccess = () => {} }) {
         id='fullname'
         name='fullname'
         label='Họ và tên'
-        value={formik.values.full_name}
+        value={formik.values.fullname}
         onChange={formik.handleChange}
-        error={Boolean(formik.errors.full_name)}
-        helperText={formik.errors.full_name}
+        error={Boolean(formik.errors.fullname)}
+        helperText={formik.errors.fullname}
       />
       <CustomTextField
         fullWidth
