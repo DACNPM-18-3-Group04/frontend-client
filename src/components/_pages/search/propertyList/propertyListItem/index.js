@@ -5,14 +5,14 @@ import {
   CardMedia,
   Typography,
   Stack,
-  CardActionArea,
 } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
 import { blue } from '@mui/material/colors';
-import getLocalDatetimeISOString from '../../../../helpers/utils/getLocalDatetimeISOString';
+import getLocalDatetimeISOString from '../../../../../helpers/utils/getLocalDatetimeISOString';
+import ClippedTypography from '../../../../_common/utils/clippedTypography';
 import { getAddressDistrict } from './helper';
 
-export default function PropertyCardItem({
+export default function PropertyListItem({
   property = {
     id: '',
     title: '',
@@ -52,42 +52,54 @@ export default function PropertyCardItem({
   let addressDistrict = getAddressDistrict(property.district);
 
   return (
-    <Card sx={{ height: '100%' }}>
-      <CardActionArea component={RouterLink} to={`/info/${property.id}`}>
-        <CardMedia
-          component='img'
-          sx={{ height: 150 }}
-          image={imageURL}
-          alt=''
-        />
-        <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-          <CardContent>
+    <Card>
+      <Box sx={{ display: 'flex', flexDirection: 'row' }}>
+        <RouterLink to={`/info/${property.id}`}>
+          <CardMedia
+            component='img'
+            sx={{ width: 240, height: 150 }}
+            image={imageURL}
+          />
+        </RouterLink>
+        <CardContent>
+          <Box sx={{ display: 'flex', flexDirection: 'column' }}>
             <Typography
-              component='div'
-              variant='body2'
+              component={RouterLink}
+              to={`/info/${property.id}`}
+              variant='body1'
               color={blue[900]}
               noWrap
+              sx={{
+                textDecoration: 'none',
+              }}
             >
               <b>{property.title}</b>
             </Typography>
-            <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1}>
+            <Stack direction='row' spacing={1}>
               <Typography variant='subtitle2' noWrap>
                 <b>Giá </b> {property.price} đ
               </Typography>
               <Typography variant='subtitle2' noWrap>
                 <b>Diện tích </b> {property.area} m2
               </Typography>
+              <Typography variant='subtitle2' noWrap>
+                <b>Địa chỉ </b> {property.address}, {addressDistrict}
+              </Typography>
             </Stack>
-            <Typography variant='caption'>
-              {property.address}, {addressDistrict}
-            </Typography>
-            <Box marginY={2} />
-            <Typography variant='caption' noWrap>
-              {createdAtDateTime}
-            </Typography>
-          </CardContent>
-        </Box>
-      </CardActionArea>
+            <ClippedTypography variant='subtitle2'>
+              {property.description}
+            </ClippedTypography>
+            <Stack direction='row' spacing={1}>
+              <Typography variant='caption' noWrap>
+                {property.user.fullname}
+              </Typography>
+              <Typography variant='caption' noWrap>
+                {createdAtDateTime}
+              </Typography>
+            </Stack>
+          </Box>
+        </CardContent>
+      </Box>
     </Card>
   );
 }
