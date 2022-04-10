@@ -7,9 +7,11 @@ export default function AvatarInfo(props) {
   return (
     <div>
       <Box>
-        <IconButton onClick={()=>{
-            console.log("Change avatar")
-        }}>
+        <IconButton
+          onClick={() => {
+            console.log('Change avatar');
+          }}
+        >
           <Avatar alt={fullname} src={avatar}>
             {fullname ? fullname.charAt(0) : null}
           </Avatar>

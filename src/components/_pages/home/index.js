@@ -7,7 +7,7 @@ import SearchSection from './searchSection';
 
 export default function Home() {
   return (
-    <Container maxWidth={false}>
+    <Container maxWidth={false} disableGutters>
       <SearchSection />
       <RecommendSection />
     </Container>
