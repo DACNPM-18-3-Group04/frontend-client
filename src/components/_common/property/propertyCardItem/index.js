@@ -52,7 +52,7 @@ export default function PropertyCardItem({
   let addressDistrict = getAddressDistrict(property.district);
 
   return (
-    <Card>
+    <Card sx={{ height: '100%' }}>
       <CardActionArea component={RouterLink} to={`/info/${property.id}`}>
         <CardMedia
           component='img'
