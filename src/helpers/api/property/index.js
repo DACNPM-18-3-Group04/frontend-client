@@ -1,4 +1,6 @@
 import api, { getAuthConfig } from '..';
+
+import PropertyListAPI from './list';
 const baseURL = '/property';
 
 export const getPropertyInfo = (id) => {
@@ -45,6 +47,7 @@ const PropertyAPI = {
   handleRatingProperty,
   handleSendReview,
   createProperty,
+  ...PropertyListAPI,
 };
 
 export default PropertyAPI;

@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 import CustomThemeProvider from './theme';
 import store from '../../redux/store';
 import FetchSignedInUser from './fetchers/fetchSignedInUser';
+import FetchPropertyLocation from './fetchers/fetchPropertyLocations';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <CustomThemeProvider>
         <CssBaseline />
         <FetchSignedInUser>
+          <FetchPropertyLocation />
           <Layout />
         </FetchSignedInUser>
       </CustomThemeProvider>
