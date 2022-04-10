@@ -10,6 +10,7 @@ import {
 import { Link as RouterLink } from 'react-router-dom';
 import { blue } from '@mui/material/colors';
 import getLocalDatetimeISOString from '../../../../helpers/utils/getLocalDatetimeISOString';
+import { getAddressDistrict } from './helper';
 
 export default function PropertyCardItem({
   property = {
@@ -48,6 +49,7 @@ export default function PropertyCardItem({
     property.createdAt && property.createdAt !== ''
       ? getLocalDatetimeISOString(property.createdAt)
       : '';
+  let addressDistrict = getAddressDistrict(property.district);
 
   return (
     <Card>
@@ -56,7 +58,7 @@ export default function PropertyCardItem({
           component='img'
           sx={{ height: 150 }}
           image={imageURL}
-          alt='Live from space album cover'
+          alt=''
         />
         <Box sx={{ display: 'flex', flexDirection: 'column' }}>
           <CardContent>
@@ -76,6 +78,9 @@ export default function PropertyCardItem({
                 <b>Diện tích </b> {property.area} m2
               </Typography>
             </Stack>
+            <Typography variant='caption'>
+              {property.address}, {addressDistrict}
+            </Typography>
             <Box marginY={2} />
             <Typography variant='caption' noWrap>
               {createdAtDateTime}

@@ -10,6 +10,7 @@ import { Link as RouterLink } from 'react-router-dom';
 import { blue } from '@mui/material/colors';
 import getLocalDatetimeISOString from '../../../../../helpers/utils/getLocalDatetimeISOString';
 import ClippedTypography from '../../../../_common/utils/clippedTypography';
+import { getAddressDistrict } from './helper';
 
 export default function PropertyListItem({
   property = {
@@ -58,7 +59,6 @@ export default function PropertyListItem({
             component='img'
             sx={{ width: 240, height: 150 }}
             image={imageURL}
-            alt='Live from space album cover'
           />
         </RouterLink>
         <CardContent>
@@ -103,18 +103,3 @@ export default function PropertyListItem({
     </Card>
   );
 }
-
-const getAddressDistrict = (district) => {
-  let addressDistrict = '';
-  if (!district || !district.name) {
-    return addressDistrict;
-  }
-  addressDistrict = `${district.name}`;
-
-  const province = district.province;
-  if (!province || !province.name) {
-    return addressDistrict;
-  }
-
-  return `${addressDistrict}, ${province.name}`;
-};
