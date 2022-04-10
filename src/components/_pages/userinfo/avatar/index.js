@@ -4,20 +4,23 @@ import { Box } from '@mui/system';
 import UploadFile from '../../uploadFile';
 import { useState } from 'react';
 
-export default function AvatarInfo(props) {
+const baseURL = process.env.REACT_APP_API
 
+export default function AvatarInfo(props) {
   const [open, setOpen] = useState(false);
   const { avatar, fullname } = props;
+  console.log('datnc avatar', avatar, fullname);
   return (
     <div>
       <Box>
-        <UploadFile
-        open={open}></UploadFile>
-        <IconButton onClick={()=>{
-            console.log("Change avatar")
-            setOpen(true)
-        }}>
-          <Avatar alt={fullname} src={avatar}>
+        <UploadFile open={open}></UploadFile>
+        <IconButton
+          onClick={() => {
+            console.log('Change avatar');
+            setOpen(true);
+          }}
+        >
+          <Avatar alt={fullname} src={`${baseURL}${avatar}`}>
             {fullname ? fullname.charAt(0) : null}
           </Avatar>
         </IconButton>
