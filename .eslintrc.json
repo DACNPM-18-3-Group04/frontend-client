@@ -32,7 +32,7 @@
         "semi": true,
         "printWidth": 80,
         "trailingComma": "all",
-        "endOfLine": "off"
+        "endOfLine": "auto"
       }
     ]
   }
