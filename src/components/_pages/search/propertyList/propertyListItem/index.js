@@ -56,7 +56,7 @@ export default function PropertyListItem({
         <RouterLink to={`/info/${property.id}`}>
           <CardMedia
             component='img'
-            sx={{ width: 150, height: 150 }}
+            sx={{ width: 240, height: 150 }}
             image={imageURL}
             alt='Live from space album cover'
           />

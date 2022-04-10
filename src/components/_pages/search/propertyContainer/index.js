@@ -69,7 +69,13 @@ export default function PropertySearchContainer() {
   }
 
   if (properties.length === 0) {
-    return <ErrorPage message='(Không có kết quả phù hợp)' />;
+    return (
+      <ErrorPage
+        message='(Không có kết quả phù hợp)'
+        backToHome={false}
+        minHeight='50vh'
+      />
+    );
   }
 
   const paginationItemRenderer = renderPaginationItem(query);
