@@ -6,7 +6,11 @@ export default function PropertyCreatePage() {
     <Container>
       <Paper>
         <Box padding={2} my={3}>
-          <Typography>Đăng tin rao mới</Typography>
+          <Box mb={2}>
+            <Typography variant='h6'>
+              <b>Đăng tin rao mới</b>
+            </Typography>
+          </Box>
           <CreateProperty />
         </Box>
       </Paper>
