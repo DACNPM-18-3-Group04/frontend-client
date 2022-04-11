@@ -27,7 +27,7 @@ function Router() {
       <Route exact path='/user/activation'>
         <AccountActivationPage />
       </Route>
-      <Route exact path='/ad/me'>
+      <Route exact path='/property/me'>
         <AuthorizationRoute>
           <MyAd />
         </AuthorizationRoute>

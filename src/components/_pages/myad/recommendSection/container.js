@@ -7,12 +7,14 @@ import formatErrorResponse from '../../../../helpers/utils/formatErrorResponse';
 import Loader from '../../../_common/loader';
 import ErrorPage from '../../../_common/errorPage';
 import PropertyCardList from '../../../_common/property/propertyCardList';
+import { useSelector } from 'react-redux';
 
 export default function PropertyCardContainer(props) {
+  const user = useSelector((state) => state.user);
   const [properties, setProperties] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
-  const title = props.title || 'Nổi bật'
+  const title = props.title || 'Nổi bật';
 
   useEffect(() => {
     loadData();
@@ -22,7 +24,7 @@ export default function PropertyCardContainer(props) {
     setProperties([]);
     setIsLoading(true);
     setError(null);
-    PropertyAPI.getRecommendProperties()
+    PropertyAPI.getMyAd(user.id || null)
       .then((result) => {
         if (!result.data.success) {
           throw new Error(result.data.message);

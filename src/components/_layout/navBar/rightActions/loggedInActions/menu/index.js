@@ -26,12 +26,12 @@ export default function LoggedInMenu({
           fullWidth
           variant='contained'
           component={Link}
-          to='property/create'
+          to='/property/create'
         >
           Đăng tin rao
         </Button>
       </MenuItem>
-      <MenuItem component={Link} to='/ad/me'>
+      <MenuItem component={Link} to='/property/me'>
         <Button fullWidth variant='contained'>
           Tin rao của tôi
         </Button>

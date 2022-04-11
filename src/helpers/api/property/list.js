@@ -24,9 +24,16 @@ export const getRecommendProperties = () => {
   return searchProperty(5, 0, {});
 };
 
+export const getMyAd = (authorId, limit = 5, page = 0) => {
+  const query = { authorId: authorId || null };
+
+  return searchProperty(limit, page, query);
+};
+
 const PropertyListAPI = {
   searchProperty,
   getRecommendProperties,
+  getMyAd,
 };
 
 export default PropertyListAPI;

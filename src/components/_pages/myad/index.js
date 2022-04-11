@@ -5,7 +5,7 @@ import { Container } from '@mui/material';
 import RecommendSection from './recommendSection';
 import SearchSection from './searchSection';
 
-export default function Home() {
+export default function MyAd() {
   return (
     <Container maxWidth={false} disableGutters>
       <SearchSection />
