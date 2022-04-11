@@ -11,34 +11,8 @@ const leftSz = 2;
 const rightSz = 8;
 
 let schema = yup.object({
-  email: yup.string().email('Sai cú pháp email').required('Không thể bỏ trống'),
-  tel: yup
-    .string()
-    .matches(
-      /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/,
-      'SĐT không chính xác',
-    )
-    .required('Không thể bỏ trống'),
   notes: yup.string(),
 });
-
-const customInputStyle = {
-  '& .MuiInputLabel-root': {
-    fontSize: '.85rem',
-    lineHeight: '.9rem',
-  },
-  '& .MuiInput-root': {
-    mt: 1.4,
-  },
-  '& .MuiInput-input': {
-    fontSize: '.8rem',
-    lineHeight: '.9rem',
-  },
-  '& .MuiFormHelperText-root': {
-    fontSize: '.72rem',
-    lineHeight: '.9rem',
-  },
-};
 
 export default function LeaveContactDialog({
   fullname,
@@ -50,18 +24,12 @@ export default function LeaveContactDialog({
   const user = useSelector((state) => state.user);
   const formik = useFormik({
     initialValues: {
-      email: user.contact_email || '',
-      tel: user.contact_number || '',
       notes: '',
     },
     enableReinitialize: true,
     validationSchema: schema,
     onSubmit: async (values) => {
-      await handleSubmit({
-        contact_email: values.email,
-        contact_number: values.tel,
-        notes: values.notes,
-      });
+      await handleSubmit({ notes: values.notes });
       onClose();
     },
   });
@@ -88,19 +56,7 @@ export default function LeaveContactDialog({
                 Email liên hệ
               </Typography>
               <Box flex={rightSz} sx={cellStyle}>
-                <TextField
-                  ml={0.5}
-                  fullWidth
-                  variant='standard'
-                  autoFocus={user.id === undefined}
-                  name='email'
-                  label='Email'
-                  value={formik.values.email}
-                  helperText={formik.errors.email}
-                  onChange={formik.handleChange}
-                  size='small'
-                  sx={customInputStyle}
-                />
+                <Typography>{user.contact_email}</Typography>
               </Box>
             </Box>
 
@@ -109,18 +65,7 @@ export default function LeaveContactDialog({
                 SĐT liên hệ
               </Typography>
               <Box flex={rightSz} sx={{ ...cellStyle, display: 'inline' }}>
-                <TextField
-                  ml={0.5}
-                  fullWidth
-                  variant='standard'
-                  name='tel'
-                  label='SĐT'
-                  value={formik.values.tel}
-                  helperText={formik.errors.tel}
-                  onChange={formik.handleChange}
-                  size='small'
-                  sx={customInputStyle}
-                />
+                <Typography>{user.contact_number}</Typography>
               </Box>
             </Box>
           </Box>

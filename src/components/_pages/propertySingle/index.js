@@ -49,7 +49,7 @@ export default function PropertySingle() {
         .catch((err) => {
           handleFailure(err);
           // got error, navigate to 404
-          // history.push('/404');
+          history.push('/404');
         });
     }
     return () => {
