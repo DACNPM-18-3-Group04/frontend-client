@@ -31,7 +31,7 @@ export default function LoggedInMenu({
           Đăng tin rao
         </Button>
       </MenuItem>
-      <MenuItem>
+      <MenuItem component={Link} to='/ad/me'>
         <Button fullWidth variant='contained'>
           Tin rao của tôi
         </Button>

@@ -11,6 +11,7 @@ import PropertySingle from '../_pages/propertySingle';
 import AuthorizationRoute from './customRoute/authorizationRoute';
 import PropertyCreatePage from '../_pages/propertyCreate';
 import PropertySearchPage from '../_pages/search';
+import MyAd from '../_pages/myad'
 
 // Pages
 
@@ -25,6 +26,11 @@ function Router() {
       </Route>
       <Route exact path='/user/activation'>
         <AccountActivationPage />
+      </Route>
+      <Route exact path='/ad/me'>
+        <AuthorizationRoute>
+          <MyAd />
+        </AuthorizationRoute>
       </Route>
       <Route exact path='/user/me'>
         <AuthorizationRoute>
