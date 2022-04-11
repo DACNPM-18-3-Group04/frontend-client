@@ -4,7 +4,6 @@ import { Box } from '@mui/system';
 import UploadFile from '../../uploadFile';
 import { useState } from 'react';
 
-const baseURL = process.env.REACT_APP_API
 
 export default function AvatarInfo(props) {
   const [open, setOpen] = useState(false);
@@ -20,7 +19,7 @@ export default function AvatarInfo(props) {
             setOpen(true);
           }}
         >
-          <Avatar alt={fullname} src={`${baseURL}${avatar}`}>
+          <Avatar alt={fullname} src={avatar}>
             {fullname ? fullname.charAt(0) : null}
           </Avatar>
         </IconButton>

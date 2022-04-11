@@ -14,6 +14,8 @@ const initialState = {
   token: 'empty_token',
 };
 
+const baseURL = process.env.REACT_APP_API
+
 export const UserSlice = createSlice({
   name: 'user',
   initialState: initialState,
@@ -23,7 +25,7 @@ export const UserSlice = createSlice({
         action.payload;
       if (id !== undefined) state.id = id;
       if (fullname !== undefined) state.fullname = fullname;
-      if (avatar !== undefined) state.avatar = avatar;
+      if (avatar !== undefined) state.avatar = `${baseURL}${avatar}`;
       if (contact_email !== undefined) state.contact_email = contact_email;
       if (contact_number !== undefined) state.contact_number = contact_number;
       if (token !== undefined) state.token = token;
@@ -42,7 +44,7 @@ export const UserSlice = createSlice({
         state.isLogin = true;
         state.id = id;
         state.fullname = fullname;
-        state.avatar = avatar;
+        state.avatar = `${baseURL}${avatar}`;
         state.token = token;
         if (contact_email !== undefined) state.contact_email = contact_email;
         if (contact_number !== undefined) state.contact_number = contact_number;
