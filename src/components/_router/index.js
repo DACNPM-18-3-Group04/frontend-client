@@ -33,7 +33,7 @@ function Router() {
       <Route exact path='/property/create'>
         <PropertyCreatePage />
       </Route>
-      <Route exact path='/info/:id'>
+      <Route exact path='/property_test'>
         <PropertySingle />
       </Route>
       <Route>

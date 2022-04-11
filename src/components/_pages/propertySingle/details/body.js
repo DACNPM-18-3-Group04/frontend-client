@@ -1,22 +1,6 @@
 import { Box, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
-
-const tableContainer = {
-  border: '1px solid #e0e0e0',
-  marginY: 1,
-  borderRadius: 2,
-};
-
-const rowStyle = {
-  display: 'flex',
-  height: '2rem',
-  alignItems: 'center',
-};
-
-const cellStyle = {
-  marginLeft: 2,
-  fontSize: '.8rem',
-};
+import { cellStyle, rowStyle, tableContainer } from '../styleObj';
 
 export default function PropertyDetailBody({
   discription,
