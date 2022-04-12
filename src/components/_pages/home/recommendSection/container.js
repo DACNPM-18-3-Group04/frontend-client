@@ -12,7 +12,7 @@ export default function PropertyCardContainer(props) {
   const [properties, setProperties] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
-  const title = props.title || 'Nổi bật'
+  const title = props.title || 'Nổi bật';
 
   useEffect(() => {
     loadData();

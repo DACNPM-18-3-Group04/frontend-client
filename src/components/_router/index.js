@@ -1,5 +1,5 @@
 import { Route, Switch } from 'react-router-dom';
-// import AuthOnlyRoute from './customRoute/authOnlyRoute';
+import AuthOnlyRoute from './customRoute/authOnlyRoute';
 // import NonAuthOnlyRoute from './customRoute/nonAuthOnlyRoute';
 
 // Pages
@@ -8,10 +8,9 @@ import Home from '../_pages/home';
 import AccountActivationPage from '../_pages/activation';
 import UserInfo from '../_pages/userinfo';
 import PropertySingle from '../_pages/propertySingle';
-import AuthorizationRoute from './customRoute/authorizationRoute';
 import PropertyCreatePage from '../_pages/propertyCreate';
 import PropertySearchPage from '../_pages/search';
-import MyAd from '../_pages/myad'
+import MyAd from '../_pages/myad';
 
 // Pages
 
@@ -27,22 +26,18 @@ function Router() {
       <Route exact path='/user/activation'>
         <AccountActivationPage />
       </Route>
-      <Route exact path='/property/me'>
-        <AuthorizationRoute>
-          <MyAd />
-        </AuthorizationRoute>
-      </Route>
-      <Route exact path='/user/me'>
-        <AuthorizationRoute>
-          <UserInfo />
-        </AuthorizationRoute>
-      </Route>
+      <AuthOnlyRoute exact path='/property/me'>
+        <MyAd />
+      </AuthOnlyRoute>
+      <AuthOnlyRoute exact path='/user/me'>
+        <UserInfo />
+      </AuthOnlyRoute>
       <Route exact path='/properties'>
         <PropertySearchPage />
       </Route>
-      <Route exact path='/property/create'>
+      <AuthOnlyRoute exact path='/property/create'>
         <PropertyCreatePage />
-      </Route>
+      </AuthOnlyRoute>
       <Route exact path='/info/:id'>
         <PropertySingle />
       </Route>

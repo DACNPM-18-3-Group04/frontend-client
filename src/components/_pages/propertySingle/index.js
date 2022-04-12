@@ -33,6 +33,9 @@ export default function PropertySingle() {
     if (isMounted) {
       getPropertyInfo(id)
         .then((res) => {
+          if (res.data.success === false) {
+            throw new Error(res.data.message);
+          }
           setData(res.data.property);
 
           getImgLinks(id)

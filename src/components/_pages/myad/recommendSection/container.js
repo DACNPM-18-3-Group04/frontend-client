@@ -17,14 +17,14 @@ export default function PropertyCardContainer(props) {
   const title = props.title || 'Nổi bật';
 
   useEffect(() => {
-    loadData();
-  }, []);
+    loadData(user.id);
+  }, [user]);
 
-  const loadData = () => {
+  const loadData = (userId) => {
     setProperties([]);
     setIsLoading(true);
     setError(null);
-    PropertyAPI.getMyAd(user.id || null)
+    PropertyAPI.getMyAd(userId || null)
       .then((result) => {
         if (!result.data.success) {
           throw new Error(result.data.message);

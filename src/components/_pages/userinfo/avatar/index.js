@@ -1,9 +1,7 @@
 import { Avatar, IconButton, Typography } from '@mui/material';
-import EditIcon from '@mui/icons-material/Edit';
 import { Box } from '@mui/system';
 import UploadFile from '../../uploadFile';
 import { useState } from 'react';
-
 
 export default function AvatarInfo(props) {
   const [open, setOpen] = useState(false);

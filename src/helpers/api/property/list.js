@@ -27,7 +27,8 @@ export const getRecommendProperties = () => {
 export const getMyAd = (authorId, limit = 5, page = 0) => {
   const query = { authorId: authorId || null };
 
-  return searchProperty(limit, page, query);
+  // No pagination, for now
+  return searchProperty(null, page, query);
 };
 
 const PropertyListAPI = {

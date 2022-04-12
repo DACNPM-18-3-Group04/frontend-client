@@ -1,18 +1,23 @@
+/* eslint-disable no-unused-vars */
 import UploadFileAPI from '../../../helpers/api/uploadFile/index';
 
-import React, { Component, useState } from 'react';
-import { Container, Dialog } from '@mui/material';
-import { DialogProps } from '@mui/material/Dialog';
+import React, {
+  // Component,
+  useState,
+} from 'react';
+import {
+  // Container,
+  Dialog,
+} from '@mui/material';
+// import { DialogProps } from '@mui/material/Dialog';
 
 function UploadFile(props) {
   const [selectedFile, setSelectedFile] = useState(null);
   const [fullWidth, setFullWidth] = useState(true);
-  const [maxWidth, setMaxWidth] = useState('sm')
+  const [maxWidth, setMaxWidth] = useState('sm');
 
   const handleMaxWidthChange = (event) => {
-    setMaxWidth(
-      event.target.value,
-    );
+    setMaxWidth(event.target.value);
   };
 
   const handleClose = () => {};
@@ -29,7 +34,7 @@ function UploadFile(props) {
     const formData = new FormData();
 
     formData.append('file', selectedFile);
-    formData.append('action','upload-avatar')
+    formData.append('action', 'upload-avatar');
     UploadFileAPI.uploadFile(formData);
   };
 

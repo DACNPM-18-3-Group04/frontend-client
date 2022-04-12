@@ -7,7 +7,6 @@ export const uploadFile = async (file) => {
   return api.post(`${baseURL}`, file, config);
 };
 
-
 const UploadFileAPI = {
   uploadFile,
 };

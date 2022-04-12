@@ -14,7 +14,7 @@ const initialState = {
   token: 'empty_token',
 };
 
-const baseURL = process.env.REACT_APP_API
+const baseURL = process.env.REACT_APP_API;
 
 export const UserSlice = createSlice({
   name: 'user',
