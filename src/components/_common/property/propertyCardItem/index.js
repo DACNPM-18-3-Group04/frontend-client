@@ -4,13 +4,14 @@ import {
   CardContent,
   CardMedia,
   Typography,
-  Stack,
   CardActionArea,
 } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
 import { blue } from '@mui/material/colors';
 import getLocalDatetimeISOString from '../../../../helpers/utils/getLocalDatetimeISOString';
 import { getAddressDistrict } from './helper';
+import formatCurrency from '../../../../helpers/format/formatCurrency';
+import formatArea from '../../../../helpers/format/formatArea';
 
 export default function PropertyCardItem({
   property = {
@@ -70,14 +71,21 @@ export default function PropertyCardItem({
             >
               <b>{property.title}</b>
             </Typography>
-            <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1}>
-              <Typography variant='subtitle2' noWrap>
-                <b>Giá </b> {property.price} đ
+            <Box
+              sx={{
+                display: 'flex',
+                flexDirection: 'row',
+                columnGap: 1,
+                flexWrap: 'wrap',
+              }}
+            >
+              <Typography variant='subtitle2'>
+                <b>Giá </b> {formatCurrency(property.price || 0)}
               </Typography>
-              <Typography variant='subtitle2' noWrap>
-                <b>Diện tích </b> {property.area} m2
+              <Typography variant='subtitle2'>
+                <b>Diện tích </b> {formatArea(property.area || 0)} m&sup2;
               </Typography>
-            </Stack>
+            </Box>
             <Typography variant='caption'>
               {property.address}, {addressDistrict}
             </Typography>
