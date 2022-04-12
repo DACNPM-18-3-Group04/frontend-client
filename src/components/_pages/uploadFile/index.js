@@ -7,20 +7,31 @@ import React, {
 } from 'react';
 import {
   // Container,
+  Box,
   Dialog,
+  DialogContent,
 } from '@mui/material';
+import BootstrapDialogTitle from '../../_common/dialogs/_utils/bootstrapDialogTitle/dialogTitle.component';
+import { toast } from 'react-toastify';
+import formatErrorResponse from '../../../helpers/utils/formatErrorResponse';
 // import { DialogProps } from '@mui/material/Dialog';
+import { useDispatch } from 'react-redux';
+import { updateUser } from '../../../redux/slices/user';
 
-function UploadFile(props) {
+function UploadFile({
+  open,
+  onClose = () => {
+    console.log('close');
+  },
+}) {
   const [selectedFile, setSelectedFile] = useState(null);
   const [fullWidth, setFullWidth] = useState(true);
   const [maxWidth, setMaxWidth] = useState('sm');
+  const dispatch = useDispatch();
 
   const handleMaxWidthChange = (event) => {
     setMaxWidth(event.target.value);
   };
-
-  const handleClose = () => {};
 
   const handleFullWidthChange = (event) => {
     setFullWidth(event.target.checked);
@@ -35,7 +46,16 @@ function UploadFile(props) {
 
     formData.append('file', selectedFile);
     formData.append('action', 'upload-avatar');
-    UploadFileAPI.uploadFile(formData);
+    UploadFileAPI.uploadFile(formData)
+      .then((res) => {
+        dispatch(updateUser(res.data?.data));
+        toast.success('cập nhật thành công');
+      })
+      .catch((err) => {
+        console.log(err);
+        const errDetails = formatErrorResponse(err);
+        toast.error(errDetails.message);
+      });
   };
 
   const fileData = () => {
@@ -61,21 +81,25 @@ function UploadFile(props) {
     }
   };
 
+  const handleClose = () => {
+    onClose();
+  };
+
   return (
     <Dialog
-      open={props.open}
+      open={open}
       fullWidth={fullWidth}
       maxWidth={maxWidth}
       onClose={handleClose}
     >
-      <div>
-        <h3>File Upload</h3>
-        <div>
-          <input type='file' onChange={onFileChange} />
-          <button onClick={onFileUpload}>Upload!</button>
-        </div>
+      <BootstrapDialogTitle onClose={handleClose}>
+        File Upload
+      </BootstrapDialogTitle>
+      <DialogContent>
+        <input type='file' onChange={onFileChange} />
+        <button onClick={onFileUpload}>Upload!</button>
         {fileData()}
-      </div>
+      </DialogContent>
     </Dialog>
   );
 }

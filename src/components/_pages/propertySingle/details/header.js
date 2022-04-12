@@ -8,8 +8,8 @@ import { useSelector } from 'react-redux';
 
 export default function PropertyDetailHeader({
   title,
-  district,
-  province,
+  district = {},
+  province = {},
   price,
   area,
   isWished,

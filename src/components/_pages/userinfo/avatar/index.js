@@ -7,16 +7,16 @@ export default function AvatarInfo(props) {
   const [open, setOpen] = useState(false);
   const { avatar, fullname } = props;
   console.log('datnc avatar', avatar, fullname);
+
+  const toggleOpen = () => {
+    setOpen(!open);
+  };
+
   return (
     <div>
       <Box>
-        <UploadFile open={open}></UploadFile>
-        <IconButton
-          onClick={() => {
-            console.log('Change avatar');
-            setOpen(true);
-          }}
-        >
+        <UploadFile open={open} onClose={toggleOpen} />
+        <IconButton onClick={toggleOpen}>
           <Avatar alt={fullname} src={avatar}>
             {fullname ? fullname.charAt(0) : null}
           </Avatar>

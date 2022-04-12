@@ -8,4 +8,14 @@ const PropertyTypes = Object.freeze({
   LENT,
 });
 
+export const getPropertyTypeName = (type) => {
+  if (type === PropertyTypes.SELL) {
+    return 'Đăng bán';
+  } else if (type === PropertyTypes.LENT) {
+    return 'Cho thuê';
+  }
+  //DEFAULT
+  return ' Không xác định';
+};
+
 export default PropertyTypes;

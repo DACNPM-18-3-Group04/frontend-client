@@ -15,6 +15,7 @@ import { useSelector } from 'react-redux';
 import { handleFailure } from '../../../helpers/api/_helpers';
 import { toast } from 'react-toastify';
 import { handleLeaveContactForThePropertyPoster } from '../../../helpers/api/contact';
+import Loader from '../../_common/loader';
 
 export default function PropertySingle() {
   const [data, setData] = useState({});
@@ -23,6 +24,7 @@ export default function PropertySingle() {
     userRating: 0,
     totalRating: 0,
   });
+  const [loading, setLoading] = useState(false);
   const user = useSelector((state) => state.user);
   let { id } = useParams();
   const history = useHistory();
@@ -30,6 +32,7 @@ export default function PropertySingle() {
   useEffect(() => {
     let isMounted = true;
     if (isMounted) {
+      setLoading(true);
       getPropertyInfo({ propertyID: id, userID: user.id })
         .then((res) => {
           if (res.data.success === false) {
@@ -41,6 +44,7 @@ export default function PropertySingle() {
             totalRating: res.data.data?.property?.total_rating || 0,
           });
           setFavorite(res.data.data?.property?.interests?.isFavorite);
+          setLoading(false);
         })
         .catch((err) => {
           handleFailure(err);
@@ -87,6 +91,10 @@ export default function PropertySingle() {
       .then((_) => toast.success('Gửi thông tin liên hệ thành công'))
       .catch((err) => handleFailure(err));
   };
+
+  if (loading) {
+    return <Loader />;
+  }
 
   return (
     <Container maxWidth='lg'>

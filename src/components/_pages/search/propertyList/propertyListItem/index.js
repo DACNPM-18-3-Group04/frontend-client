@@ -11,6 +11,8 @@ import { blue } from '@mui/material/colors';
 import getLocalDatetimeISOString from '../../../../../helpers/utils/getLocalDatetimeISOString';
 import ClippedTypography from '../../../../_common/utils/clippedTypography';
 import { getAddressDistrict } from './helper';
+import formatCurrency from '../../../../../helpers/format/formatCurrency';
+import formatArea from '../../../../../helpers/format/formatArea';
 
 export default function PropertyListItem({
   property = {
@@ -75,17 +77,24 @@ export default function PropertyListItem({
             >
               <b>{property.title}</b>
             </Typography>
-            <Stack direction='row' spacing={1}>
+            <Box
+              sx={{
+                display: 'flex',
+                flexDirection: 'row',
+                columnGap: 1,
+                flexWrap: 'wrap',
+              }}
+            >
               <Typography variant='subtitle2' noWrap>
-                <b>Giá </b> {property.price} đ
+                <b>Giá </b> {formatCurrency(property.price || 0)}
               </Typography>
               <Typography variant='subtitle2' noWrap>
-                <b>Diện tích </b> {property.area} m2
+                <b>Diện tích </b> {formatArea(property.area || 0)} m&sup2;
               </Typography>
               <Typography variant='subtitle2' noWrap>
                 <b>Địa chỉ </b> {property.address}, {addressDistrict}
               </Typography>
-            </Stack>
+            </Box>
             <ClippedTypography variant='subtitle2'>
               {property.description}
             </ClippedTypography>

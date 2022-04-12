@@ -1,5 +1,6 @@
 import { Box, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
+import { getPropertyTypeName } from '../../../../helpers/constants/propertyTypes';
 import { cellStyle, rowStyle, tableContainer } from '../styleObj';
 
 export default function PropertyDetailBody({
@@ -23,7 +24,7 @@ export default function PropertyDetailBody({
     if (isMounted) {
       setEstateInfo((pre) => ({
         ...pre,
-        'Loại tin': property_type || 'Chưa xác định',
+        'Loại tin': getPropertyTypeName(property_type) || 'Chưa xác định',
         Loại: seller_type || 'Chưa xác định',
         'Pháp lý': certificate || 'Chưa xác định',
         'Địa chỉ':
