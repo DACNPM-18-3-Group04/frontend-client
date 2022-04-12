@@ -5,7 +5,7 @@ import PropertyDetail from './details';
 import ThumbSlider from './thumbs';
 import { useEffect, useState } from 'react';
 import {
-  getContactInfo,
+  // getContactInfo,
   getImgLinks,
   getPropertyInfo,
   getWishedStateOfViewer,
@@ -18,11 +18,13 @@ import { useSelector } from 'react-redux';
 import { handleFailure } from '../../../helpers/api/_helpers';
 import { toast } from 'react-toastify';
 import { handleLeaveContactForThePropertyPoster } from '../../../helpers/api/contact';
+import Loader from '../../_common/loader';
 
 export default function PropertySingle() {
   const [data, setData] = useState({});
   const [imgs, setImgs] = useState([]);
   const [favorite, setFavorite] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [contacts, setContacts] = useState({});
   const user = useSelector((state) => state.user);
   let { id } = useParams();
@@ -31,23 +33,28 @@ export default function PropertySingle() {
   useEffect(() => {
     let isMounted = true;
     if (isMounted) {
+      setLoading(true);
       getPropertyInfo(id)
         .then((res) => {
           if (res.data.success === false) {
             throw new Error(res.data.message);
           }
-          setData(res.data.property);
+          const data = res.data.data;
+          console.log(res);
+          setData(data.property);
+          setContacts(data.property.user || {});
 
           getImgLinks(id)
-            .then((res) => setImgs(res.data.imgs))
+            .then((res) => setImgs(data.imgs))
             .catch((err) => handleFailure(err));
-          getContactInfo(id)
-            .then((res) => setContacts(res.data.seller))
-            .catch((err) => handleFailure(err));
+          // getContactInfo(id)
+          //   .then((res) => setContacts(data.seller))
+          //   .catch((err) => handleFailure(err));
           if (user)
             getWishedStateOfViewer(id, user.id)
               .then((res) => setFavorite(res.data))
               .catch((err) => handleFailure(err));
+          setLoading(false);
         })
         .catch((err) => {
           handleFailure(err);
@@ -96,6 +103,10 @@ export default function PropertySingle() {
       .catch((err) => handleFailure(err));
   };
 
+  if (loading) {
+    return <Loader />;
+  }
+
   return (
     <Container maxWidth='lg'>
       <Card variant='outlined'>
@@ -121,8 +132,8 @@ export default function PropertySingle() {
                   sx={{ mx: 2 }}
                   title={data.title}
                   address={data.address}
-                  district={data.district}
-                  province={data.province}
+                  district={data.district || {}}
+                  province={data.district ? data.district.province : {}}
                   price={data.price}
                   area={data.area}
                   isWished={favorite}

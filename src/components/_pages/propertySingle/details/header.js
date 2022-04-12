@@ -8,8 +8,8 @@ import { useSelector } from 'react-redux';
 
 export default function PropertyDetailHeader({
   title,
-  district,
-  province,
+  district = {},
+  province = {},
   price,
   area,
   isWished,
@@ -33,8 +33,8 @@ export default function PropertyDetailHeader({
           {title || 'Tiêu đề không tồn tại'}
         </Typography>
         <Typography my={1}>
-          {district && province
-            ? `quận ${district}, ${province}`
+          {district.name && province.name
+            ? `${district.name}, ${province.name}`
             : 'Vị trí quận, thành phố chưa xác định'}
         </Typography>
         <Box my={1}>

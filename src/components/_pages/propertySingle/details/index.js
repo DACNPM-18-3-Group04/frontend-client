@@ -6,8 +6,8 @@ export default function PropertyDetail({
   sx,
   title,
   address,
-  district,
-  province,
+  district = {},
+  province = {},
   price,
   area,
   isWished,
@@ -21,8 +21,8 @@ export default function PropertyDetail({
     <Box sx={sx}>
       <PropertyDetailHeader
         title={title}
-        district={district}
-        province={province}
+        district={district || {}}
+        province={province || {}}
         price={price}
         area={area}
         isWished={isWished}
@@ -33,8 +33,8 @@ export default function PropertyDetail({
         certificate={certificate}
         discription={discription}
         address={address}
-        district={district}
-        province={province}
+        district={district || {}}
+        province={province || {}}
         property_type={property_type}
         seller_type={seller_type}
       />
