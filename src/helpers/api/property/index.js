@@ -4,7 +4,7 @@ import PropertyListAPI from './list';
 const baseURL = '/property';
 
 export const getPropertyInfo = (id) => {
-  return api.get(`${baseURL}?id=${id}`);
+  return api.get(`${baseURL}/${id}`);
 };
 
 export const getImgLinks = (id) => {
