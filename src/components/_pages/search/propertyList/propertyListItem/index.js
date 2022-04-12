@@ -54,7 +54,7 @@ export default function PropertyListItem({
   return (
     <Card>
       <Box sx={{ display: 'flex', flexDirection: 'row' }}>
-        <RouterLink to={`/info/${property.id}`}>
+        <RouterLink to={`/property/${property.id}`}>
           <CardMedia
             component='img'
             sx={{ width: 240, height: 150 }}
@@ -65,7 +65,7 @@ export default function PropertyListItem({
           <Box sx={{ display: 'flex', flexDirection: 'column' }}>
             <Typography
               component={RouterLink}
-              to={`/info/${property.id}`}
+              to={`/property/${property.id}`}
               variant='body1'
               color={blue[900]}
               noWrap

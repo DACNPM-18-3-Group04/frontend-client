@@ -38,7 +38,7 @@ function Router() {
       <AuthOnlyRoute exact path='/property/create'>
         <PropertyCreatePage />
       </AuthOnlyRoute>
-      <Route exact path='/info/:id'>
+      <Route exact path='/property/:id'>
         <PropertySingle />
       </Route>
       <Route>

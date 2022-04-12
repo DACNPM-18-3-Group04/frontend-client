@@ -34,7 +34,7 @@ export default function PropertyDetailHeader({
         </Typography>
         <Typography my={1}>
           {district && province
-            ? `quận ${district}, ${province}`
+            ? `${district}, ${province}`
             : 'Vị trí quận, thành phố chưa xác định'}
         </Typography>
         <Box my={1}>

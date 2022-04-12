@@ -30,7 +30,7 @@ export default function PropertyDetailBody({
           (address &&
             district &&
             province &&
-            `${address}, quận ${district}, ${province}`) ||
+            `${address}, ${district}, ${province}`) ||
           'Chưa xác định',
       }));
     }
