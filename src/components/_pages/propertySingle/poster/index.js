@@ -1,50 +1,49 @@
-import { Avatar, Button, IconButton, Typography } from '@mui/material';
+import { Button, Typography } from '@mui/material';
 import { blue } from '@mui/material/colors';
 import { Box } from '@mui/system';
+import { useState } from 'react';
+import AvatarDisplay from '../../../_common/avatar';
+import { cellStyle, rowStyle, tableContainer } from '../styleObj';
+import LeaveContactDialog from './leaveContact';
 import PropertyReview from './review';
-
-const tableContainer = {
-  border: '1px solid #e0e0e0',
-  marginY: 1,
-  borderRadius: 2,
-};
-
-const rowStyle = {
-  display: 'flex',
-  height: '2rem',
-  alignItems: 'center',
-};
-
-const cellStyle = {
-  marginLeft: 2,
-  fontSize: '.8rem',
-};
+import ViewContactDialog from './viewContacts';
 
 export default function PropertyPoster({
   fullname,
   avatar,
+  contact_email,
+  contact_number,
   account_type,
   rating,
   handleRatingChange,
   rating_accumulator,
   handleSendReview,
+  handleSubmitLeaveContact,
   sx,
 }) {
+  const [viewContactDialog, setViewContactDialog] = useState(false);
+  const [leaveContactDialog, setLeaveContactDialog] = useState(false);
+
+  const handleOpenViewContact = () => {
+    setViewContactDialog(true);
+  };
+
+  const handleCloseViewContact = () => {
+    setViewContactDialog(false);
+  };
+
+  const handleOpenLeaveContact = () => {
+    setLeaveContactDialog(true);
+  };
+
+  const handleCloseLeaveContact = () => {
+    setLeaveContactDialog(false);
+  };
+
   return (
     <Box sx={sx}>
       <Typography fontWeight='bold'>Được đăng bởi</Typography>
-      <Box sx={{ display: 'flex', flexDirection: 'column', my: 1 }}>
-        <Box display='flex' justifyContent='center'>
-          <IconButton>
-            <Avatar alt={fullname} src={avatar} sx={{ width: 48, height: 48 }}>
-              {fullname ? fullname.charAt(0) : null}
-            </Avatar>
-          </IconButton>
-        </Box>
-        <Typography marginLeft='.5rem' variant='h6' alignSelf='center'>
-          {fullname || 'Tên người đăng'}
-        </Typography>
-      </Box>
+      <AvatarDisplay fullname={fullname} avatarSrc={avatar} />
 
       <Typography fontWeight='bold'>Chi tiết người đăng tin</Typography>
       <Box sx={tableContainer}>
@@ -82,12 +81,39 @@ export default function PropertyPoster({
           mx: 'auto',
         }}
       >
-        <Button variant='contained' color='info' sx={{ my: 0.5 }}>
+        <Button
+          variant='contained'
+          color='info'
+          sx={{ my: 0.5 }}
+          onClick={handleOpenLeaveContact}
+        >
           Để lại thông tin liên hệ
         </Button>
-        <Button variant='outlined' color='info' sx={{ my: 0.5 }}>
+        <Button
+          variant='outlined'
+          color='info'
+          sx={{ my: 0.5 }}
+          onClick={handleOpenViewContact}
+        >
           Xem thông tin liên hệ
         </Button>
+
+        <ViewContactDialog
+          avatarSrc={avatar}
+          contact_email={contact_email}
+          contact_number={contact_number}
+          fullname={fullname}
+          open={viewContactDialog}
+          onClose={handleCloseViewContact}
+        />
+
+        <LeaveContactDialog
+          avatarSrc={avatar}
+          fullname={fullname}
+          handleSubmit={handleSubmitLeaveContact}
+          open={leaveContactDialog}
+          onClose={handleCloseLeaveContact}
+        />
       </Box>
 
       <PropertyReview

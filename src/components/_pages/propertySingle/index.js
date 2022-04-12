@@ -17,6 +17,7 @@ import { useHistory, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { handleFailure } from '../../../helpers/api/_helpers';
 import { toast } from 'react-toastify';
+import { handleLeaveContactForThePropertyPoster } from '../../../helpers/api/contact';
 
 export default function PropertySingle() {
   const [data, setData] = useState({});
@@ -86,6 +87,12 @@ export default function PropertySingle() {
       .catch((err) => handleFailure(err));
   };
 
+  const onLeaveContact = (data) => {
+    handleLeaveContactForThePropertyPoster({ ...data, propertyID: id })
+      .then((_) => toast.success('Gửi thông tin liên hệ thành công'))
+      .catch((err) => handleFailure(err));
+  };
+
   return (
     <Container maxWidth='lg'>
       <Card variant='outlined'>
@@ -135,6 +142,7 @@ export default function PropertySingle() {
               rating_accumulator={contacts.rating_accumulator}
               handleRatingChange={onRatingChange}
               handleSendReview={onSendReview}
+              handleSubmitLeaveContact={onLeaveContact}
             />
           </Grid>
         </Grid>
