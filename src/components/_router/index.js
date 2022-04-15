@@ -11,6 +11,7 @@ import PropertySingle from '../_pages/propertySingle';
 import PropertyCreatePage from '../_pages/propertyCreate';
 import PropertySearchPage from '../_pages/search';
 import MyAd from '../_pages/myad';
+import PropertyUpdatePage from '../_pages/propertyUpdate';
 
 // Pages
 
@@ -37,6 +38,9 @@ function Router() {
       </Route>
       <AuthOnlyRoute exact path='/property/create'>
         <PropertyCreatePage />
+      </AuthOnlyRoute>
+      <AuthOnlyRoute exact path='/property/update/:id'>
+        <PropertyUpdatePage />
       </AuthOnlyRoute>
       <Route exact path='/property/:id'>
         <PropertySingle />
