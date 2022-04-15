@@ -3,8 +3,8 @@ import api, { getAuthConfig } from '..';
 import PropertyListAPI from './list';
 const baseURL = '/property';
 
-export const getPropertyInfo = (id) => {
-  return api.get(`${baseURL}/${id}`);
+export const getPropertyInfo = ({ propertyID, userID }) => {
+  return api.get(`${baseURL}/details?id=${propertyID}&userID=${userID}`);
 };
 
 export const getImgLinks = (id) => {

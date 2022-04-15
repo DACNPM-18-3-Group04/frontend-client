@@ -29,9 +29,9 @@ export default function PropertyDetailBody({
         'Pháp lý': certificate || 'Chưa xác định',
         'Địa chỉ':
           (address &&
-            district.name &&
-            province.name &&
-            `${address}, ${district.name}, ${province.name}`) ||
+            district &&
+            province &&
+            `${address}, ${district}, ${province}`) ||
           'Chưa xác định',
       }));
     }

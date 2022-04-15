@@ -54,7 +54,7 @@ export default function PropertyCardItem({
 
   return (
     <Card sx={{ height: '100%' }}>
-      <CardActionArea component={RouterLink} to={`/info/${property.id}`}>
+      <CardActionArea component={RouterLink} to={`/property/${property.id}`}>
         <CardMedia
           component='img'
           sx={{ height: 150 }}
