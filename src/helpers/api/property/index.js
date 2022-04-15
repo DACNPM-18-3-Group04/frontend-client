@@ -39,6 +39,10 @@ export const createProperty = async (propertyInfo) => {
   return api.post(`${baseURL}/`, propertyInfo, getAuthConfig());
 };
 
+export const updateProperty = async (propertyInfo) => {
+  return api.post(`${baseURL}/update`, propertyInfo, getAuthConfig());
+};
+
 const PropertyAPI = {
   getPropertyInfo,
   getImgLinks,
@@ -47,6 +51,7 @@ const PropertyAPI = {
   handleRatingProperty,
   handleSendReview,
   createProperty,
+  updateProperty,
   ...PropertyListAPI,
 };
 

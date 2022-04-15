@@ -11,15 +11,15 @@ import {
 } from '@mui/material';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
-import PropertyAPI from '../../../helpers/api/property';
-import { useHistory } from 'react-router-dom';
+import PropertyAPI from '../../../../helpers/api/property';
 import { useSelector } from 'react-redux';
-import { selectPropertyLocation } from '../../../redux/slices/propertyLocation';
+import { selectPropertyLocation } from '../../../../redux/slices/propertyLocation';
 
 import * as yup from 'yup';
 import { useFormik } from 'formik';
-import PropertyTypes from '../../../helpers/constants/propertyTypes';
-import formatErrorResponse from '../../../helpers/utils/formatErrorResponse';
+import PropertyTypes from '../../../../helpers/constants/propertyTypes';
+import formatErrorResponse from '../../../../helpers/utils/formatErrorResponse';
+import PropertyStatus from '../../../../helpers/constants/propertyStatus';
 
 const validationSchema = yup.object({
   title: yup
@@ -37,36 +37,52 @@ const validationSchema = yup.object({
 
 const INITIAL_DISTRICT = { id: '', name: '(Chọn)' };
 
-export default function CreateProperty() {
+export default function UpdatePropertyForm({
+  propertyId = null,
+  title = '',
+  description = '',
+  address = '',
+  type = PropertyTypes.DEFAULT,
+  district_id = '',
+  price = 0,
+  area = 0,
+  propertyStatus = PropertyStatus.DEFAULT,
+}) {
   const propertyLocations = useSelector(selectPropertyLocation);
   const districts = [...propertyLocations.districts] || [];
   districts.unshift(INITIAL_DISTRICT);
-  const history = useHistory();
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = (values) => {
     setLoading(true);
-    PropertyAPI.createProperty(values)
+    const submitValues = {
+      ...values,
+      id: propertyId,
+    };
+
+    PropertyAPI.updateProperty(submitValues)
       .then(() => {
-        toast.success('Đăng thành công');
-        history.push('/');
+        toast.success('Cập nhật thành công');
       })
       .catch((err) => {
         let res = formatErrorResponse(err);
         toast.error(res.message);
+      })
+      .finally((_) => {
         setLoading(false);
       });
   };
 
   const formik = useFormik({
     initialValues: {
-      title: '',
-      description: '',
-      address: '',
-      type: PropertyTypes.DEFAULT,
-      district_id: '',
-      price: 0,
-      area: 0,
+      title: title,
+      description: description,
+      address: address,
+      type: type,
+      district_id: district_id,
+      price: price,
+      area: area,
+      status: propertyStatus,
     },
     validationSchema: validationSchema,
     onSubmit: handleSubmit,
@@ -78,7 +94,7 @@ export default function CreateProperty() {
         <Grid container spacing={2}>
           <Grid item xs={12}>
             <Typography variant='body1'>
-              <b>Đăng tin rao mới</b>
+              <b>Cập nhật tin rao</b>
             </Typography>
           </Grid>
           <Grid item xs={12} md={9}>
@@ -228,6 +244,23 @@ export default function CreateProperty() {
           </Grid>
           <Grid item xs={12} md={3}>
             <Paper sx={{ padding: 2 }}>
+              <TextField
+                fullWidth
+                id='status'
+                name='status'
+                label='Trạng thái'
+                margin='dense'
+                select
+                value={formik.values.status}
+                onChange={formik.handleChange}
+                error={Boolean(formik.errors.status)}
+                helperText={formik.errors.status || ' '}
+              >
+                <MenuItem value={PropertyStatus.ACTIVE}>Đang rao bán</MenuItem>
+                <MenuItem value={PropertyTypes.STOP_SELL}>
+                  Ngừng rao bán
+                </MenuItem>
+              </TextField>
               <Button
                 fullWidth
                 disabled={loading}
@@ -235,7 +268,7 @@ export default function CreateProperty() {
                 variant='contained'
                 color='primary'
               >
-                {loading ? <CircularProgress color='inherit' /> : 'Đăng'}
+                {loading ? <CircularProgress color='inherit' /> : 'Cập nhật'}
               </Button>
             </Paper>
           </Grid>

@@ -12,6 +12,7 @@ import getLocalDatetimeISOString from '../../../../helpers/utils/getLocalDatetim
 import { getAddressDistrict } from './helper';
 import formatCurrency from '../../../../helpers/format/formatCurrency';
 import formatArea from '../../../../helpers/format/formatArea';
+import PropertyCardActions from './cardActions';
 
 export default function PropertyCardItem({
   property = {
@@ -23,6 +24,7 @@ export default function PropertyCardItem({
     area: 0,
     address: '',
     type: 'L',
+    author_id: -1,
     user: {
       id: '',
       email: '',
@@ -54,6 +56,10 @@ export default function PropertyCardItem({
 
   return (
     <Card sx={{ height: '100%' }}>
+      <PropertyCardActions
+        author_id={property.author_id}
+        propertyId={property.id}
+      />
       <CardActionArea component={RouterLink} to={`/property/${property.id}`}>
         <CardMedia
           component='img'
