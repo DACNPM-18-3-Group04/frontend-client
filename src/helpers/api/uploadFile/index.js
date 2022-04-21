@@ -1,14 +1,21 @@
 import api, { getAuthConfig } from '..';
-// import { getAuthConfig } from '..';
-const baseURL = '/uploadfile';
+const baseURL = '/upload';
 
-export const uploadFile = async (file) => {
+// export const uploadFile = async (file) => {
+//   const config = getAuthConfig();
+//   return api.post(`${baseURL}/file`, file, config);
+// };
+
+export const uploadAvatar = async (formData) => {
   const config = getAuthConfig();
-  return api.post(`${baseURL}`, file, config);
+  const data = formData;
+
+  return api.post(`${baseURL}/avatar`, data, config);
 };
 
 const UploadFileAPI = {
-  uploadFile,
+  // uploadFile,
+  uploadAvatar,
 };
 
 export default UploadFileAPI;
