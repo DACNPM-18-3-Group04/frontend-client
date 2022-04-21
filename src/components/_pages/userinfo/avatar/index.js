@@ -1,6 +1,6 @@
-import { Avatar, IconButton, Typography } from '@mui/material';
+import { Avatar, IconButton, Typography, Tooltip } from '@mui/material';
 import { Box } from '@mui/system';
-import UploadFile from '../../uploadFile';
+import UploadFile from './uploadFile';
 import { useState } from 'react';
 
 export default function AvatarInfo(props) {
@@ -14,13 +14,20 @@ export default function AvatarInfo(props) {
 
   return (
     <div>
-      <Box>
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'row',
+        }}
+      >
         <UploadFile open={open} onClose={toggleOpen} />
-        <IconButton onClick={toggleOpen}>
-          <Avatar alt={fullname} src={avatar}>
-            {fullname ? fullname.charAt(0) : null}
-          </Avatar>
-        </IconButton>
+        <Tooltip title='Chỉnh sửa avatar'>
+          <IconButton onClick={toggleOpen}>
+            <Avatar alt={fullname} src={avatar}>
+              {fullname ? fullname.charAt(0) : null}
+            </Avatar>
+          </IconButton>
+        </Tooltip>
         <Typography marginLeft='.5rem' variant='h6' alignSelf='center'>
           {fullname}
         </Typography>
