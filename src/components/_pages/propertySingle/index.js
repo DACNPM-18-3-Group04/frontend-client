@@ -40,7 +40,7 @@ export default function PropertySingle() {
           }
           setData(res.data.data?.property);
           setRating({
-            userRating: res.data.data?.contactor?.rating || 0,
+            userRating: res.data.data?.myContact?.review?.rating || 0,
             totalRating: res.data.data?.property?.total_rating || 0,
           });
           setFavorite(res.data.data?.property?.interests?.isFavorite);
@@ -53,7 +53,6 @@ export default function PropertySingle() {
         });
     }
     return () => {
-      isMounted = false;
       setData({});
       setRating({ userRating: 0, totalRating: 0 });
       setFavorite(false);
@@ -138,9 +137,12 @@ export default function PropertySingle() {
           <Grid item md xs>
             <PropertyPoster
               sx={{ mx: 2 }}
+              userID={data.user?.id}
               account_type={data.user?.type}
               avatar={data.user?.avatar}
               fullname={data.user?.fullname}
+              contact_email={data.user?.contact_email}
+              contact_number={data.user?.contact_number}
               rating={rating.userRating}
               rating_accumulator={rating.totalRating}
               handleRatingChange={onRatingChange}

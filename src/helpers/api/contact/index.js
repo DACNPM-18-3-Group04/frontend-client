@@ -15,8 +15,12 @@ export const handleLeaveContactForThePropertyPoster = ({
   );
 };
 
+export const handleGetListContact = () =>
+  api.get(`${baseURL}/list`, getAuthConfig());
+
 const ContactAPI = {
   handleLeaveContactForThePropertyPoster,
+  handleGetListContact,
 };
 
 export default ContactAPI;

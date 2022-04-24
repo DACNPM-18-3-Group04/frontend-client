@@ -43,7 +43,14 @@ export default function ViewContactDialog({
             <Typography flex={leftSz} fontWeight='bold' sx={cellStyle}>
               Email
             </Typography>
-            <Box flex={rightSz} sx={cellStyle}>
+            <Box
+              flex={rightSz}
+              sx={{
+                ...cellStyle,
+                display: 'inline-flex',
+                alignItems: 'center',
+              }}
+            >
               <Typography
                 ml={0.5}
                 display='inline'
@@ -55,7 +62,7 @@ export default function ViewContactDialog({
               {contact_email && (
                 <Button
                   variant='text'
-                  sx={{ textTransform: 'lowercase' }}
+                  sx={{ textTransform: 'lowercase', fontSize: '.8rem' }}
                   disabled={!contact_email}
                   onClick={() => copyToClipboard(contact_email)}
                 >
@@ -75,7 +82,14 @@ export default function ViewContactDialog({
             <Typography flex={leftSz} fontWeight='bold' sx={cellStyle}>
               SĐT
             </Typography>
-            <Box flex={rightSz} sx={{ ...cellStyle, display: 'inline' }}>
+            <Box
+              flex={rightSz}
+              sx={{
+                ...cellStyle,
+                display: 'inline-flex',
+                alignItems: 'center',
+              }}
+            >
               <Typography
                 ml={0.5}
                 display='inline'
@@ -87,7 +101,7 @@ export default function ViewContactDialog({
               {contact_number && (
                 <Button
                   variant='text'
-                  sx={{ textTransform: 'lowercase' }}
+                  sx={{ textTransform: 'lowercase', fontSize: '.8rem' }}
                   disabled={!contact_number}
                   onClick={() => copyToClipboard(contact_number)}
                 >
