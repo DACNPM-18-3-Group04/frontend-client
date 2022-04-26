@@ -2,6 +2,7 @@ import { Button, Typography } from '@mui/material';
 import { blue } from '@mui/material/colors';
 import { Box } from '@mui/system';
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
 import AvatarDisplay from '../../../_common/avatar';
 import { cellStyle, rowStyle, tableContainer } from '../styleObj';
 import LeaveContactDialog from './leaveContact';
@@ -9,6 +10,7 @@ import PropertyReview from './review';
 import ViewContactDialog from './viewContacts';
 
 export default function PropertyPoster({
+  userID,
   fullname,
   avatar,
   contact_email,
@@ -23,6 +25,7 @@ export default function PropertyPoster({
 }) {
   const [viewContactDialog, setViewContactDialog] = useState(false);
   const [leaveContactDialog, setLeaveContactDialog] = useState(false);
+  const user = useSelector((state) => state.user);
 
   const handleOpenViewContact = () => {
     setViewContactDialog(true);
@@ -85,6 +88,7 @@ export default function PropertyPoster({
           variant='contained'
           color='info'
           sx={{ my: 0.5 }}
+          disabled={user.id === userID}
           onClick={handleOpenLeaveContact}
         >
           Để lại thông tin liên hệ

@@ -12,6 +12,7 @@ import PropertyCreatePage from '../_pages/propertyCreate';
 import PropertySearchPage from '../_pages/search';
 import MyAd from '../_pages/myad';
 import PropertyUpdatePage from '../_pages/propertyUpdate';
+import MyContactList from '../_pages/myContactList';
 
 // Pages
 
@@ -45,6 +46,9 @@ function Router() {
       <Route exact path='/property/:id'>
         <PropertySingle />
       </Route>
+      <AuthOnlyRoute exact path='/contact/me'>
+        <MyContactList />
+      </AuthOnlyRoute>
       <Route>
         <NotFoundPage />
       </Route>
