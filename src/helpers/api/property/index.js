@@ -27,14 +27,6 @@ export const getContactInfo = (propertyID) => {
   return api.get(`${baseURL}/contact?prop_id=${propertyID}`);
 };
 
-export const handleRatingProperty = ({ propertyID, value }) => {
-  return api.post(`${baseURL}/rating`, { propertyID, value }, getAuthConfig());
-};
-
-export const handleSendReview = (feedback) => {
-  return api.post(`${baseURL}/review`, { feedback }, getAuthConfig());
-};
-
 export const createProperty = async (propertyInfo) => {
   return api.post(`${baseURL}/`, propertyInfo, getAuthConfig());
 };
@@ -48,8 +40,6 @@ const PropertyAPI = {
   getImgLinks,
   handleChangeWishedPost,
   getContactInfo,
-  handleRatingProperty,
-  handleSendReview,
   createProperty,
   updateProperty,
   ...PropertyListAPI,

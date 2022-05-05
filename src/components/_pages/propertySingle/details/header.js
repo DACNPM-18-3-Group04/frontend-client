@@ -13,18 +13,19 @@ export default function PropertyDetailHeader({
   price,
   area,
   isWished,
-  onChangeWish,
 }) {
   const [favorite, setFavorite] = useState(false);
   const user = useSelector((state) => state.user);
 
   useEffect(() => {
     let isMounted = true;
-    if (isMounted && user?.id) setFavorite(isWished);
+    if (isMounted && user.id) setFavorite(isWished);
     return () => {
       isMounted = false;
     };
   }, [isWished, user]);
+
+  const handleToggleWished = () => {};
 
   return (
     <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -60,13 +61,10 @@ export default function PropertyDetailHeader({
         </Box>
       </Box>
 
-      {user?.id && (
+      {user.id && (
         <Box>
           <Card sx={{ boxShadow: 3 }}>
-            <IconButton
-              sx={{ borderRadius: 0 }}
-              onClick={() => onChangeWish(!isWished)}
-            >
+            <IconButton sx={{ borderRadius: 0 }} onClick={handleToggleWished}>
               {favorite ? (
                 <FavoriteIcon sx={{ color: pink[600] }} />
               ) : (

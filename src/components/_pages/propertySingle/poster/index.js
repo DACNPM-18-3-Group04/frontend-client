@@ -17,10 +17,7 @@ export default function PropertyPoster({
   contact_number,
   account_type,
   rating,
-  handleRatingChange,
   rating_accumulator,
-  handleSendReview,
-  handleSubmitLeaveContact,
   sx,
 }) {
   const [viewContactDialog, setViewContactDialog] = useState(false);
@@ -114,17 +111,12 @@ export default function PropertyPoster({
         <LeaveContactDialog
           avatarSrc={avatar}
           fullname={fullname}
-          handleSubmit={handleSubmitLeaveContact}
           open={leaveContactDialog}
           onClose={handleCloseLeaveContact}
         />
       </Box>
 
-      <PropertyReview
-        rating={rating}
-        handleRatingChange={handleRatingChange}
-        handleSendReview={handleSendReview}
-      />
+      <PropertyReview rating={rating} />
     </Box>
   );
 }

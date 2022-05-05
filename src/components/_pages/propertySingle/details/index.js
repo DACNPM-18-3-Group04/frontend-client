@@ -11,7 +11,6 @@ export default function PropertyDetail({
   price,
   area,
   isWished,
-  onChangeWish,
   certificate,
   discription,
   property_type,
@@ -26,7 +25,6 @@ export default function PropertyDetail({
         price={price}
         area={area}
         isWished={isWished}
-        onChangeWish={onChangeWish}
       />
 
       <PropertyDetailBody
