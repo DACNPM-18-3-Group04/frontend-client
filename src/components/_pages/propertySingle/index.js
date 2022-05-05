@@ -10,6 +10,10 @@ import { useSelector } from 'react-redux';
 import { handleFailure } from '../../../helpers/api/_helpers';
 import Loader from '../../_common/loader';
 
+const isWished = (status) => {
+  return status === 'A';
+};
+
 export default function PropertySingle() {
   const [data, setData] = useState({});
   const [loading, setLoading] = useState(false);
@@ -77,6 +81,10 @@ export default function PropertySingle() {
                   discription={data.discription}
                   property_type={data.type}
                   seller_type={data.user?.type}
+                  isWished={
+                    data.userwishlists?.length > 0 &&
+                    isWished(data.userwishlists[0]?.status)
+                  }
                 />
               }
             />
@@ -90,8 +98,8 @@ export default function PropertySingle() {
               fullname={data.user?.fullname}
               contact_email={data.user?.contact_email}
               contact_number={data.user?.contact_number}
-              rating={data.review?.userRating}
-              rating_accumulator={data.review?.totalRating}
+              rating={data.total_rating}
+              rating_accumulator={data.rating_accumulator}
             />
           </Grid>
         </Grid>

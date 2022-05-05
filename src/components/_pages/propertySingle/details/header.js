@@ -5,6 +5,10 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { useEffect, useState } from 'react';
 import { pink } from '@mui/material/colors';
 import { useSelector } from 'react-redux';
+import { handleChangeWishedState } from '../../../../helpers/api/user';
+import { useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { handleFailure } from '../../../../helpers/api/_helpers';
 
 export default function PropertyDetailHeader({
   title,
@@ -16,6 +20,7 @@ export default function PropertyDetailHeader({
 }) {
   const [favorite, setFavorite] = useState(false);
   const user = useSelector((state) => state.user);
+  const { id } = useParams();
 
   useEffect(() => {
     let isMounted = true;
@@ -25,7 +30,14 @@ export default function PropertyDetailHeader({
     };
   }, [isWished, user]);
 
-  const handleToggleWished = () => {};
+  const handleToggleWished = () => {
+    handleChangeWishedState(id)
+      .then((res) => {
+        toast.success(res.data.message);
+        setFavorite((pre) => !pre);
+      })
+      .catch((err) => handleFailure(err));
+  };
 
   return (
     <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>

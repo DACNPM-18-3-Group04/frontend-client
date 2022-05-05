@@ -12,17 +12,6 @@ export const getImgLinks = (id) => {
   return api.get(`${baseURL}/media?property_id=${id}`);
 };
 
-export const handleChangeWishedPost = (isFavorite) => {
-  return api.put(`${baseURL}/fav`, { isFavorite }, getAuthConfig());
-};
-
-export const getWishedStateOfViewer = (propertyID, userID) => {
-  return api.get(
-    `${baseURL}/wish?prop_id=${propertyID}&user_id=${userID}`,
-    getAuthConfig(),
-  );
-};
-
 export const getContactInfo = (propertyID) => {
   return api.get(`${baseURL}/contact?prop_id=${propertyID}`);
 };
@@ -38,7 +27,6 @@ export const updateProperty = async (propertyInfo) => {
 const PropertyAPI = {
   getPropertyInfo,
   getImgLinks,
-  handleChangeWishedPost,
   getContactInfo,
   createProperty,
   updateProperty,

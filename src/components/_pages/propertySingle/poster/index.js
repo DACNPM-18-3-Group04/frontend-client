@@ -60,7 +60,7 @@ export default function PropertyPoster({
             Đánh giá
           </Typography>
           <Box flex={7} sx={{ ...cellStyle, display: 'inline' }}>
-            {rating || 0} / 5.0
+            {parseFloat(rating).toFixed(2) || 0} / 5.0
             <Typography
               ml={0.5}
               display='inline'
@@ -116,7 +116,7 @@ export default function PropertyPoster({
         />
       </Box>
 
-      <PropertyReview rating={rating} />
+      <PropertyReview rating={0} />
     </Box>
   );
 }

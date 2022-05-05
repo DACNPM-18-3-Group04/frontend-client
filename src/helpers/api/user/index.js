@@ -35,6 +35,10 @@ export const getUserInfo = () => {
   return api.get(`${baseURL}/info`, config);
 };
 
+export const handleChangeWishedState = (property_id) => {
+  return api.post(`${baseURL}/wishlist`, { property_id }, getAuthConfig());
+};
+
 const UserAPI = {
   handleSignUp,
   handleActivation,
