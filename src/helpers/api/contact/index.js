@@ -15,6 +15,14 @@ export const handleLeaveContactForThePropertyPoster = ({
   );
 };
 
+export const handleSendReview = (content, rating, propertyID) => {
+  return api.post(
+    `${baseURL}/review?property_id=${propertyID}`,
+    { content, rating },
+    getAuthConfig(),
+  );
+};
+
 export const handleGetListContact = () =>
   api.get(`${baseURL}/list`, getAuthConfig());
 

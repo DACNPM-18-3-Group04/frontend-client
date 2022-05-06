@@ -4,26 +4,18 @@ import PropertyPoster from './poster';
 import PropertyDetail from './details';
 import ThumbSlider from './thumbs';
 import { useEffect, useState } from 'react';
-import {
-  getPropertyInfo,
-  handleChangeWishedPost,
-  handleRatingProperty,
-  handleSendReview,
-} from '../../../helpers/api/property';
+import { getPropertyInfo } from '../../../helpers/api/property';
 import { useHistory, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { handleFailure } from '../../../helpers/api/_helpers';
-import { toast } from 'react-toastify';
-import { handleLeaveContactForThePropertyPoster } from '../../../helpers/api/contact';
 import Loader from '../../_common/loader';
+
+const isWished = (status) => {
+  return status === 'A';
+};
 
 export default function PropertySingle() {
   const [data, setData] = useState({});
-  const [favorite, setFavorite] = useState(false);
-  const [rating, setRating] = useState({
-    userRating: 0,
-    totalRating: 0,
-  });
   const [loading, setLoading] = useState(false);
   const user = useSelector((state) => state.user);
   let { id } = useParams();
@@ -39,11 +31,6 @@ export default function PropertySingle() {
             throw new Error(res.data.message);
           }
           setData(res.data.data?.property);
-          setRating({
-            userRating: res.data.data?.myContact?.review?.rating || 0,
-            totalRating: res.data.data?.property?.total_rating || 0,
-          });
-          setFavorite(res.data.data?.property?.interests?.isFavorite);
           setLoading(false);
         })
         .catch((err) => {
@@ -54,42 +41,8 @@ export default function PropertySingle() {
     }
     return () => {
       setData({});
-      setRating({ userRating: 0, totalRating: 0 });
-      setFavorite(false);
     };
   }, [id, user, history]);
-
-  const handleToggleWishedButton = () => {
-    handleChangeWishedPost(!favorite)
-      .then((res) => {
-        setFavorite(res.data.favorite);
-      })
-      .catch((err) => handleFailure(err));
-  };
-
-  const onRatingChange = (_, value) => {
-    handleRatingProperty({ propertyID: id, value })
-      .then((res) => {
-        setRating((pre) => ({
-          ...pre,
-          userRating: res.data?.data?.rating,
-          totalRating: res.data?.data?.totalRating,
-        }));
-      })
-      .catch((err) => handleFailure(err));
-  };
-
-  const onSendReview = (feedback) => {
-    handleSendReview(feedback)
-      .then((_) => toast.success('Gửi đánh giá thành công'))
-      .catch((err) => handleFailure(err));
-  };
-
-  const onLeaveContact = (formValues) => {
-    handleLeaveContactForThePropertyPoster({ ...formValues, propertyID: id })
-      .then((_) => toast.success('Gửi thông tin liên hệ thành công'))
-      .catch((err) => handleFailure(err));
-  };
 
   if (loading) {
     return <Loader />;
@@ -124,12 +77,14 @@ export default function PropertySingle() {
                   province={data.district?.province?.name}
                   price={data.price}
                   area={data.area}
-                  isWished={favorite}
-                  onChangeWish={handleToggleWishedButton}
                   certificate={data.certificate}
                   discription={data.discription}
                   property_type={data.type}
                   seller_type={data.user?.type}
+                  isWished={
+                    data.userwishlists?.length > 0 &&
+                    isWished(data.userwishlists[0]?.status)
+                  }
                 />
               }
             />
@@ -143,11 +98,8 @@ export default function PropertySingle() {
               fullname={data.user?.fullname}
               contact_email={data.user?.contact_email}
               contact_number={data.user?.contact_number}
-              rating={rating.userRating}
-              rating_accumulator={rating.totalRating}
-              handleRatingChange={onRatingChange}
-              handleSendReview={onSendReview}
-              handleSubmitLeaveContact={onLeaveContact}
+              rating={data.total_rating}
+              rating_accumulator={data.rating_accumulator}
             />
           </Grid>
         </Grid>

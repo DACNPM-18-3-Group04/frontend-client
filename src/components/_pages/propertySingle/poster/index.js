@@ -17,10 +17,7 @@ export default function PropertyPoster({
   contact_number,
   account_type,
   rating,
-  handleRatingChange,
   rating_accumulator,
-  handleSendReview,
-  handleSubmitLeaveContact,
   sx,
 }) {
   const [viewContactDialog, setViewContactDialog] = useState(false);
@@ -63,7 +60,7 @@ export default function PropertyPoster({
             Đánh giá
           </Typography>
           <Box flex={7} sx={{ ...cellStyle, display: 'inline' }}>
-            {rating || 0} / 5.0
+            {parseFloat(rating).toFixed(2) || 0} / 5.0
             <Typography
               ml={0.5}
               display='inline'
@@ -114,17 +111,12 @@ export default function PropertyPoster({
         <LeaveContactDialog
           avatarSrc={avatar}
           fullname={fullname}
-          handleSubmit={handleSubmitLeaveContact}
           open={leaveContactDialog}
           onClose={handleCloseLeaveContact}
         />
       </Box>
 
-      <PropertyReview
-        rating={rating}
-        handleRatingChange={handleRatingChange}
-        handleSendReview={handleSendReview}
-      />
+      <PropertyReview rating={0} />
     </Box>
   );
 }

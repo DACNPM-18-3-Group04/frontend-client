@@ -5,6 +5,10 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { useEffect, useState } from 'react';
 import { pink } from '@mui/material/colors';
 import { useSelector } from 'react-redux';
+import { handleChangeWishedState } from '../../../../helpers/api/user';
+import { useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { handleFailure } from '../../../../helpers/api/_helpers';
 
 export default function PropertyDetailHeader({
   title,
@@ -13,18 +17,27 @@ export default function PropertyDetailHeader({
   price,
   area,
   isWished,
-  onChangeWish,
 }) {
   const [favorite, setFavorite] = useState(false);
   const user = useSelector((state) => state.user);
+  const { id } = useParams();
 
   useEffect(() => {
     let isMounted = true;
-    if (isMounted && user?.id) setFavorite(isWished);
+    if (isMounted && user.id) setFavorite(isWished);
     return () => {
       isMounted = false;
     };
   }, [isWished, user]);
+
+  const handleToggleWished = () => {
+    handleChangeWishedState(id)
+      .then((res) => {
+        toast.success(res.data.message);
+        setFavorite((pre) => !pre);
+      })
+      .catch((err) => handleFailure(err));
+  };
 
   return (
     <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -60,13 +73,10 @@ export default function PropertyDetailHeader({
         </Box>
       </Box>
 
-      {user?.id && (
+      {user.id && (
         <Box>
           <Card sx={{ boxShadow: 3 }}>
-            <IconButton
-              sx={{ borderRadius: 0 }}
-              onClick={() => onChangeWish(!isWished)}
-            >
+            <IconButton sx={{ borderRadius: 0 }} onClick={handleToggleWished}>
               {favorite ? (
                 <FavoriteIcon sx={{ color: pink[600] }} />
               ) : (

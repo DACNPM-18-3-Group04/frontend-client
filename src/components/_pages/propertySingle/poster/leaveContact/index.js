@@ -6,6 +6,10 @@ import { cellStyle, rowStyle, tableContainer } from '../../styleObj';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { useSelector } from 'react-redux';
+import { handleLeaveContactForThePropertyPoster } from '../../../../../helpers/api/contact';
+import { useParams } from 'react-router-dom';
+import { handleFailure } from '../../../../../helpers/api/_helpers';
+import { toast } from 'react-toastify';
 
 const leftSz = 2;
 const rightSz = 8;
@@ -19,18 +23,26 @@ export default function LeaveContactDialog({
   avatarSrc,
   onClose,
   open,
-  handleSubmit,
 }) {
   const user = useSelector((state) => state.user);
+  const { id } = useParams();
   const formik = useFormik({
     initialValues: {
       notes: '',
     },
     enableReinitialize: true,
     validationSchema: schema,
-    onSubmit: async (values) => {
-      await handleSubmit({ notes: values.notes });
-      onClose();
+    onSubmit: (values) => {
+      handleLeaveContactForThePropertyPoster({
+        notes: values.notes,
+        propertyID: id,
+      })
+        .then((res) => {
+          toast.success(res.data.message);
+        })
+        .catch((err) => {
+          handleFailure(err);
+        });
     },
   });
 

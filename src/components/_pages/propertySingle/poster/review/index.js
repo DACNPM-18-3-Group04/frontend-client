@@ -1,16 +1,20 @@
 import { Button, Rating, TextField, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import { styled } from '@mui/material/styles';
-import StarBorderIcon from './starBorderIcon';
-import StarIcon from './starIcon';
+import StarBorderIcon from '../../../../_common/icons/starBorderIcon';
+import StarIcon from '../../../../_common/icons/starIcon';
 import { useEffect, useState } from 'react';
 import { blue } from '@mui/material/colors';
 import { useSelector } from 'react-redux';
 import * as yup from 'yup';
 import { useFormik } from 'formik';
+import { toast } from 'react-toastify';
+import { handleSendReview } from '../../../../../helpers/api/contact';
+import { useParams } from 'react-router-dom';
+import { handleFailure } from '../../../../../helpers/api/_helpers';
 
 let schema = yup.object({
-  feedback: yup
+  content: yup
     .string()
     .min(8, 'Ít nhất 8 ký tự')
     .required('Không thể bỏ trống'),
@@ -25,64 +29,68 @@ const StyledRating = styled(Rating)({
   },
 });
 
-export default function PropertyReview({
-  rating,
-  handleRatingChange,
-  handleSendReview,
-}) {
+export default function PropertyReview({ rating }) {
   const [viewerRating, setViewerRating] = useState(5);
   const user = useSelector((state) => state.user);
+  const { id } = useParams();
   const formik = useFormik({
     initialValues: {
-      feedback: '',
+      content: '',
     },
     onSubmit: (values) => {
-      handleSendReview(values.feedback);
+      handleSendReview(values.content, viewerRating, id)
+        .then((res) => {
+          // console.log(res.data);
+          toast.success(res.data.message);
+        })
+        .catch((err) => {
+          handleFailure(err);
+        });
     },
     validationSchema: schema,
   });
 
   useEffect(() => {
     let isMounted = true;
-    if (isMounted && user?.id) setViewerRating(rating || 0);
+    if (isMounted && user.id) setViewerRating(rating || 0);
     return () => {
-      isMounted = false;
       setViewerRating(5);
     };
   }, [rating, user]);
 
   const onRatingChange = (_, newValue) => {
-    handleRatingChange(_, newValue);
+    setViewerRating(newValue);
   };
 
   return (
-    <Box>
-      <Box my={2}>
-        <Typography fontWeight='bold'>Đánh giá người đăng</Typography>
-        <Box>
-          <StyledRating
-            value={viewerRating}
-            onChange={onRatingChange}
-            disabled={!user?.id}
-            size='large'
-            icon={<StarIcon />}
-            emptyIcon={<StarBorderIcon />}
-          />
+    <form onSubmit={formik.handleSubmit}>
+      <Box>
+        <Box my={2}>
+          <Typography fontWeight='bold'>Đánh giá người đăng</Typography>
+          <Box>
+            <StyledRating
+              value={viewerRating}
+              onChange={onRatingChange}
+              name='rating'
+              disabled={!user.id}
+              size='large'
+              icon={<StarIcon />}
+              emptyIcon={<StarBorderIcon />}
+            />
+          </Box>
         </Box>
-      </Box>
 
-      <form onSubmit={formik.handleSubmit}>
         <Box my={2} display='flex' flexDirection='column'>
           <Typography marginBottom={1.5} fontWeight='bold'>
             Chi tiết
           </Typography>
           <TextField
-            id='feedback'
-            name='feedback'
+            id='content'
+            name='content'
             label='Đánh giá...'
-            value={formik.values.feedback}
+            value={formik.values.content}
             onChange={formik.handleChange}
-            helperText={formik.errors.feedback}
+            helperText={formik.errors.content}
             multiline
             type='text'
             minRows={3}
@@ -98,13 +106,13 @@ export default function PropertyReview({
             type='submit'
             sx={{ width: '11rem' }}
             color='info'
-            disabled={!user?.id}
+            disabled={!user.id}
             variant='outlined'
           >
             Đánh giá
           </Button>
         </Box>
-      </form>
-    </Box>
+      </Box>
+    </form>
   );
 }
