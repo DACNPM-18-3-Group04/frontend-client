@@ -1,14 +1,20 @@
-import { Card, IconButton, Typography } from '@mui/material';
+// !IMPORTANT
+// COMMENTED LINES ARE FOR WISHLIST FEATURES
+// THAT ARE DISABLED DUE TO LACK OF TIME & RESOURCES
+import {
+  // Card, IconButton,
+  Typography,
+} from '@mui/material';
 import { Box } from '@mui/system';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+// import FavoriteIcon from '@mui/icons-material/Favorite';
+// import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { useEffect, useState } from 'react';
-import { pink } from '@mui/material/colors';
+// import { pink } from '@mui/material/colors';
 import { useSelector } from 'react-redux';
-import { handleChangeWishedState } from '../../../../helpers/api/user';
-import { useParams } from 'react-router-dom';
-import { toast } from 'react-toastify';
-import { handleFailure } from '../../../../helpers/api/_helpers';
+// import { handleChangeWishedState } from '../../../../helpers/api/user';
+// import { useParams } from 'react-router-dom';
+// import { toast } from 'react-toastify';
+// import { handleFailure } from '../../../../helpers/api/_helpers';
 
 export default function PropertyDetailHeader({
   title,
@@ -18,9 +24,10 @@ export default function PropertyDetailHeader({
   area,
   isWished,
 }) {
+  // eslint-disable-next-line no-unused-vars
   const [favorite, setFavorite] = useState(false);
   const user = useSelector((state) => state.user);
-  const { id } = useParams();
+  // const { id } = useParams();
 
   useEffect(() => {
     let isMounted = true;
@@ -30,14 +37,14 @@ export default function PropertyDetailHeader({
     };
   }, [isWished, user]);
 
-  const handleToggleWished = () => {
-    handleChangeWishedState(id)
-      .then((res) => {
-        toast.success(res.data.message);
-        setFavorite((pre) => !pre);
-      })
-      .catch((err) => handleFailure(err));
-  };
+  // const handleToggleWished = () => {
+  //   handleChangeWishedState(id)
+  //     .then((res) => {
+  //       toast.success(res.data.message);
+  //       setFavorite((pre) => !pre);
+  //     })
+  //     .catch((err) => handleFailure(err));
+  // };
 
   return (
     <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -73,7 +80,7 @@ export default function PropertyDetailHeader({
         </Box>
       </Box>
 
-      {user.id && (
+      {/* {user.id && (
         <Box>
           <Card sx={{ boxShadow: 3 }}>
             <IconButton sx={{ borderRadius: 0 }} onClick={handleToggleWished}>
@@ -85,7 +92,7 @@ export default function PropertyDetailHeader({
             </IconButton>
           </Card>
         </Box>
-      )}
+      )} */}
     </Box>
   );
 }
