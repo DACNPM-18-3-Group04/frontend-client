@@ -8,8 +8,11 @@ import {
 } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
 import { blue } from '@mui/material/colors';
-import moment from 'moment';
+import dayjs from 'dayjs';
+import relativeTime from 'dayjs/plugin/relativeTime';
 import AvatarDisplay from '../../../_common/avatar';
+
+dayjs.extend(relativeTime);
 
 export default function ContactItem({
   contact = {
@@ -56,7 +59,7 @@ export default function ContactItem({
       : 'https://via.placeholder.com/300?text=No+image';
   const timeSince =
     contact.createdAt && contact.updatedAt
-      ? moment(contact.updatedAt || contact.createdAt).fromNow()
+      ? dayjs(contact.updatedAt || contact.createdAt).fromNow()
       : '';
   let addressDistrict = `${property.district.name}, ${property.district.province.name}`;
 
