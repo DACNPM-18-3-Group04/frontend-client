@@ -26,6 +26,16 @@ export const handleSendReview = (content, rating, propertyID) => {
 export const handleGetListContact = () =>
   api.get(`${baseURL}/list`, getAuthConfig());
 
+export const handleGetReviewsOnPost = (propertyID) =>
+  api.get(`${baseURL}/reviews?property_id=${propertyID}`, getAuthConfig());
+
+export const handleReportReview = (propertyID, reviewID, reason) =>
+  api.post(
+    `${baseURL}/report?property_id=${propertyID}&review_id=${reviewID}`,
+    { reason },
+    getAuthConfig(),
+  );
+
 const ContactAPI = {
   handleLeaveContactForThePropertyPoster,
   handleGetListContact,
