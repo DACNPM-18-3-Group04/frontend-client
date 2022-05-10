@@ -22,7 +22,7 @@ export default function ViewReviewDialog({
 
   return (
     <Dialog onClose={handleClose} open={open} fullWidth maxWidth='sm'>
-      <Box sx={{ px: 4, pt: 0.5, pb: 4 }}>
+      <Box sx={{ px: 4, pt: 0.5, pb: 4, height: '32rem' }}>
         <DialogTitle>Đánh giá trong bài đăng này</DialogTitle>
 
         <AvatarDisplay
@@ -48,10 +48,7 @@ export default function ViewReviewDialog({
           }
         />
 
-        <Box
-          maxHeight='24rem'
-          sx={{ overflowX: 'hidden', overflowY: 'scroll' }}
-        >
+        <Box sx={{ overflowX: 'hidden', overflowY: 'hidden' }}>
           <ReviewList />
         </Box>
       </Box>

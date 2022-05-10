@@ -4,7 +4,7 @@ import AvatarDisplay from '../../../../_common/avatar';
 import StarIcon from '../../../../_common/icons/starIcon';
 import ShowMoreTxt from '../../../../_common/showMoreTxt';
 import FlagIcon from '@mui/icons-material/Flag';
-import { Button, IconButton, TextField } from '@mui/material';
+import { Button, Grow, IconButton, TextField, Tooltip } from '@mui/material';
 import { useState } from 'react';
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
@@ -47,6 +47,7 @@ export default function ReviewItem({
 
   const handleShowReportScx = () => {
     if (!isReported) setShowReportScx((p) => !p);
+    else toast.warning('Đã từng báo cáo tin đánh giá này');
   };
 
   return (
@@ -72,58 +73,67 @@ export default function ReviewItem({
 
         <Box>
           <Box py={1} px={0.5}>
-            <IconButton
-              onClick={handleShowReportScx}
-              color={!isReported ? 'default' : 'warning'}
-            >
-              <FlagIcon />
-            </IconButton>
+            <Tooltip title='Báo cáo'>
+              <IconButton
+                onClick={handleShowReportScx}
+                color={!isReported ? 'default' : 'warning'}
+              >
+                <FlagIcon />
+              </IconButton>
+            </Tooltip>
           </Box>
         </Box>
       </Box>
 
       {showReportScx && (
-        <Box pb={1} pt={2} px={2}>
-          <form onSubmit={formik.handleSubmit}>
-            <TextField
-              sx={{ display: 'flex' }}
-              multiline
-              minRows={2}
-              placeholder='Lý do...'
-              name='reason'
-              maxRows={3}
-              onChange={formik.handleChange}
-              value={formik.values.reason}
-              helperText={formik.errors.reason}
-            />
+        <Grow
+          in={showReportScx}
+          style={{ transformOrigin: '0 0 0' }}
+          {...(showReportScx ? { timeout: 300 } : {})}
+        >
+          <Box pb={1} pt={2} px={2}>
+            <form onSubmit={formik.handleSubmit}>
+              <TextField
+                sx={{ display: 'flex' }}
+                multiline
+                minRows={2}
+                placeholder='Lý do...'
+                name='reason'
+                maxRows={3}
+                onChange={formik.handleChange}
+                autoFocus
+                value={formik.values.reason}
+                helperText={formik.errors.reason}
+              />
 
-            <Box
-              sx={{
-                display: 'flex',
-                my: 1,
-                justifyContent: 'flex-end',
-              }}
-            >
-              <Button
-                onClick={handleShowReportScx}
-                variant='contained'
-                type='button'
-                color='info'
-                sx={{ textTransform: 'capitalize' }}
+              <Box
+                sx={{
+                  display: 'flex',
+                  my: 1,
+                  justifyContent: 'flex-end',
+                }}
               >
-                Thu gọn
-              </Button>
-              <Button
-                variant='contained'
-                type='submit'
-                color='success'
-                sx={{ ml: 1, textTransform: 'capitalize' }}
-              >
-                Gửi
-              </Button>
-            </Box>
-          </form>
-        </Box>
+                <Button
+                  onClick={handleShowReportScx}
+                  variant='contained'
+                  type='button'
+                  color='info'
+                  sx={{ textTransform: 'capitalize' }}
+                >
+                  Thu gọn
+                </Button>
+                <Button
+                  variant='contained'
+                  type='submit'
+                  color='success'
+                  sx={{ ml: 1, textTransform: 'capitalize' }}
+                >
+                  Gửi
+                </Button>
+              </Box>
+            </form>
+          </Box>
+        </Grow>
       )}
     </Box>
   );
