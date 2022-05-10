@@ -32,7 +32,16 @@ export default function ShowMoreTxt({ txt, max = 100 }) {
           </Box>
         ) : (
           <Box pb={1}>
-            {txt}
+            <Typography
+              sx={{
+                display: 'inline',
+                fontSize: 'inherit',
+                wordWrap: 'break-word',
+                width: '100%',
+              }}
+            >
+              {txt}
+            </Typography>
             <Box
               sx={{
                 display: 'inline',

@@ -1,16 +1,10 @@
-import {
-  Box,
-  Card,
-  CardMedia,
-  Typography,
-  Stack,
-  Tooltip,
-} from '@mui/material';
+import { Box, Card, CardMedia, Typography, Stack } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
 import { blue } from '@mui/material/colors';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import AvatarDisplay from '../../../_common/avatar';
+import ShowMoreTxt from '../../../_common/showMoreTxt';
 
 dayjs.extend(relativeTime);
 
@@ -103,7 +97,7 @@ export default function ContactItem({
               </Typography>
             </Box>
 
-            <Box>
+            <Box fontSize='0.8rem'>
               <AvatarDisplay
                 avatarSrc={contact_user.avatar}
                 fullname={contact_user.fullname}
@@ -111,11 +105,24 @@ export default function ContactItem({
                 avatarStyle={{ width: 24, height: 24, fontSize: '.7rem' }}
                 textStyle={{ fontSize: '.8rem' }}
               ></AvatarDisplay>
-              <Tooltip title='Tin nhắn được gửi' placement='bottom-start'>
-                <Typography noWrap fontSize='.9rem'>
-                  <b>Nội dung:</b> {contact.notes || '<Không có nội dung>'}
+
+              <Box display='flex'>
+                <Typography
+                  sx={{
+                    fontSize: 'inherit',
+                    fontWeight: 'bold',
+                  }}
+                >
+                  Nội dung:
                 </Typography>
-              </Tooltip>
+                {contact.notes ? (
+                  <Box ml={1} flex={1}>
+                    <ShowMoreTxt txt={contact.notes} />
+                  </Box>
+                ) : (
+                  <Box ml={1}>{'<Không có nội dung>'}</Box>
+                )}
+              </Box>
             </Box>
 
             <Stack direction='row' spacing={1}>
