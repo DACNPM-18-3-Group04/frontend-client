@@ -30,7 +30,7 @@ export default function PropertySingle() {
           if (res.data.success === false) {
             throw new Error(res.data.message);
           }
-          setData(res.data.data?.property);
+          setData(res.data.data);
           setLoading(false);
         })
         .catch((err) => {
@@ -62,7 +62,7 @@ export default function PropertySingle() {
                     borderRadius: 1,
                     border: '4px solid #212121',
                   }}
-                  imgs={data?.imgs}
+                  imgs={data.property?.imgs}
                 />
               }
             />
@@ -71,19 +71,19 @@ export default function PropertySingle() {
               children={
                 <PropertyDetail
                   sx={{ mx: 2 }}
-                  title={data.title}
-                  address={data.address}
-                  district={data.district?.name}
-                  province={data.district?.province?.name}
-                  price={data.price}
-                  area={data.area}
-                  certificate={data.certificate}
-                  discription={data.discription}
-                  property_type={data.type}
-                  seller_type={data.user?.type}
+                  title={data.property?.title}
+                  address={data.property?.address}
+                  district={data.property?.district?.name}
+                  province={data.property?.district?.province?.name}
+                  price={data.property?.price}
+                  area={data.property?.area}
+                  certificate={data.property?.certificate}
+                  discription={data.property?.discription}
+                  property_type={data.property?.type}
+                  seller_type={data.property?.user?.type}
                   isWished={
-                    data.userwishlists?.length > 0 &&
-                    isWished(data.userwishlists[0]?.status)
+                    data.property?.userwishlists?.length > 0 &&
+                    isWished(data.property?.userwishlists[0]?.status)
                   }
                 />
               }
@@ -92,14 +92,14 @@ export default function PropertySingle() {
           <Grid item md xs>
             <PropertyPoster
               sx={{ mx: 2 }}
-              userID={data.user?.id}
-              account_type={data.user?.type}
-              avatar={data.user?.avatar}
-              fullname={data.user?.fullname}
-              contact_email={data.user?.contact_email}
-              contact_number={data.user?.contact_number}
-              rating={data.total_rating}
-              rating_accumulator={data.rating_accumulator}
+              userID={data.property?.user?.id}
+              account_type={data.property?.user?.type}
+              avatar={data.property?.user?.avatar}
+              fullname={data.property?.user?.fullname}
+              contact_email={data.property?.user?.contact_email}
+              contact_number={data.property?.user?.contact_number}
+              rating={data.reviews?.total_rating || 0}
+              rating_accumulator={data.reviews?.rating_accumulator}
             />
           </Grid>
         </Grid>

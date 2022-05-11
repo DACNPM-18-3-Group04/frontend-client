@@ -8,6 +8,7 @@ export default function AvatarDisplay({
   containerStyle,
   textStyle,
   nameInd = 0,
+  subTxt,
 }) {
   return (
     <Box
@@ -29,14 +30,23 @@ export default function AvatarDisplay({
           </Avatar>
         </IconButton>
       </Box>
-      <Typography
-        marginLeft='.5rem'
-        variant='h6'
-        alignSelf='center'
-        sx={textStyle}
+
+      <Box
+        display='flex'
+        flexDirection='column'
+        justifyContent='center'
+        alignContent='center'
       >
-        {fullname || 'Tên người đăng'}
-      </Typography>
+        <Typography
+          marginLeft='.5rem'
+          variant='h6'
+          alignSelf='center'
+          sx={textStyle}
+        >
+          {fullname || 'Tên người dùng'}
+        </Typography>
+        {subTxt}
+      </Box>
     </Box>
   );
 }

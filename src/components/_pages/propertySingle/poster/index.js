@@ -1,4 +1,4 @@
-import { Button, Typography } from '@mui/material';
+import { Button, Tooltip, Typography } from '@mui/material';
 import { blue } from '@mui/material/colors';
 import { Box } from '@mui/system';
 import { useState } from 'react';
@@ -8,6 +8,7 @@ import { cellStyle, rowStyle, tableContainer } from '../styleObj';
 import LeaveContactDialog from './leaveContact';
 import PropertyReview from './review';
 import ViewContactDialog from './viewContacts';
+import ViewReviewDialog from './viewReviews';
 
 export default function PropertyPoster({
   userID,
@@ -22,6 +23,7 @@ export default function PropertyPoster({
 }) {
   const [viewContactDialog, setViewContactDialog] = useState(false);
   const [leaveContactDialog, setLeaveContactDialog] = useState(false);
+  const [reviewDialog, setReviewDialog] = useState(false);
   const user = useSelector((state) => state.user);
 
   const handleOpenViewContact = () => {
@@ -38,6 +40,14 @@ export default function PropertyPoster({
 
   const handleCloseLeaveContact = () => {
     setLeaveContactDialog(false);
+  };
+
+  const handleOpenReview = () => {
+    setReviewDialog(true);
+  };
+
+  const handleCloseReview = () => {
+    setReviewDialog(false);
   };
 
   return (
@@ -61,13 +71,29 @@ export default function PropertyPoster({
           </Typography>
           <Box flex={7} sx={{ ...cellStyle, display: 'inline' }}>
             {parseFloat(rating).toFixed(2) || 0} / 5.0
-            <Typography
-              ml={0.5}
-              display='inline'
-              fontWeight='bold'
-              fontSize='inherit'
-              color={blue['A400']}
-            >{`(${rating_accumulator || 0} đánh giá)`}</Typography>
+            {userID === user.id ? (
+              <Tooltip
+                onClick={handleOpenReview}
+                title='Xem các đánh giá'
+                sx={{ cursor: 'pointer' }}
+              >
+                <Typography
+                  ml={0.5}
+                  display='inline'
+                  fontWeight='bold'
+                  fontSize='inherit'
+                  color={blue['A400']}
+                >{`(${rating_accumulator || 0} đánh giá)`}</Typography>
+              </Tooltip>
+            ) : (
+              <Typography
+                ml={0.5}
+                display='inline'
+                fontWeight='bold'
+                fontSize='inherit'
+                color={blue['A400']}
+              >{`(${rating_accumulator || 0} đánh giá)`}</Typography>
+            )}
           </Box>
         </Box>
       </Box>
@@ -113,6 +139,13 @@ export default function PropertyPoster({
           fullname={fullname}
           open={leaveContactDialog}
           onClose={handleCloseLeaveContact}
+        />
+
+        <ViewReviewDialog
+          rating={rating}
+          rating_accumulator={rating_accumulator}
+          open={reviewDialog}
+          onClose={handleCloseReview}
         />
       </Box>
 
