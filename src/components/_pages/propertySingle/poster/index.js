@@ -71,21 +71,12 @@ export default function PropertyPoster({
           </Typography>
           <Box flex={7} sx={{ ...cellStyle, display: 'inline' }}>
             {parseFloat(rating).toFixed(2) || 0} / 5.0
-            {userID === user.id ? (
-              <Tooltip
-                onClick={handleOpenReview}
-                title='Xem các đánh giá'
-                sx={{ cursor: 'pointer' }}
-              >
-                <Typography
-                  ml={0.5}
-                  display='inline'
-                  fontWeight='bold'
-                  fontSize='inherit'
-                  color={blue['A400']}
-                >{`(${rating_accumulator || 0} đánh giá)`}</Typography>
-              </Tooltip>
-            ) : (
+            {/* {userID === user.id ? ( */}
+            <Tooltip
+              onClick={handleOpenReview}
+              title='Xem các đánh giá'
+              sx={{ cursor: 'pointer' }}
+            >
               <Typography
                 ml={0.5}
                 display='inline'
@@ -93,7 +84,16 @@ export default function PropertyPoster({
                 fontSize='inherit'
                 color={blue['A400']}
               >{`(${rating_accumulator || 0} đánh giá)`}</Typography>
-            )}
+            </Tooltip>
+            {/* ) : (
+               <Typography
+                 ml={0.5}
+                 display='inline'
+                 fontWeight='bold'
+                 fontSize='inherit'
+                 color={blue['A400']}
+               >{`(${rating_accumulator || 0} đánh giá)`}</Typography>
+             )} */}
           </Box>
         </Box>
       </Box>
