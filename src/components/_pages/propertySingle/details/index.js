@@ -12,7 +12,7 @@ export default function PropertyDetail({
   area,
   isWished,
   certificate,
-  discription,
+  description,
   property_type,
   seller_type,
 }) {
@@ -29,7 +29,7 @@ export default function PropertyDetail({
 
       <PropertyDetailBody
         certificate={certificate}
-        discription={discription}
+        description={description}
         address={address}
         district={district || {}}
         province={province || {}}

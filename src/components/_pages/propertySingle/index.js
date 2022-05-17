@@ -78,7 +78,7 @@ export default function PropertySingle() {
                   price={data.property?.price}
                   area={data.property?.area}
                   certificate={data.property?.certificate}
-                  discription={data.property?.discription}
+                  description={data.property?.description}
                   property_type={data.property?.type}
                   seller_type={data.property?.user?.type}
                   isWished={

@@ -9,6 +9,8 @@ import {
   Box,
   Typography,
 } from '@mui/material';
+import OpenInNewIcon from '@mui/icons-material/OpenInNew';
+import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
 import PropertyAPI from '../../../../helpers/api/property';
@@ -270,6 +272,18 @@ export default function UpdatePropertyForm({
               >
                 {loading ? <CircularProgress color='inherit' /> : 'Cập nhật'}
               </Button>
+              <Box mt={2}>
+                <Button
+                  fullWidth
+                  component={Link}
+                  to={`/property/${propertyId}`}
+                  target='_blank'
+                  rel='noopener noreferrer'
+                >
+                  <OpenInNewIcon />
+                  Trang tin rao
+                </Button>
+              </Box>
             </Paper>
           </Grid>
         </Grid>
