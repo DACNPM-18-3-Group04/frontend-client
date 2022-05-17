@@ -9,11 +9,10 @@ export default function SignOutButton({ onAfterClicked = () => {} }) {
   const history = useHistory();
 
   const handleSignOut = () => {
-    signOutAPI().finally(() => {
-      dispatch(signOutReducer());
-      history.push('/');
-      onAfterClicked();
-    });
+    signOutAPI();
+    dispatch(signOutReducer());
+    history.push('/');
+    onAfterClicked();
   };
 
   return <MenuItem onClick={handleSignOut}>Đăng xuất</MenuItem>;
