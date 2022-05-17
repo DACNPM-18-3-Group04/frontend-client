@@ -30,6 +30,7 @@ export default function PropertySingle() {
           if (res.data.success === false) {
             throw new Error(res.data.message);
           }
+          // console.log(res.data.data);
           setData(res.data.data);
           setLoading(false);
         })
@@ -80,6 +81,8 @@ export default function PropertySingle() {
                   certificate={data.property?.certificate}
                   description={data.property?.description}
                   property_type={data.property?.type}
+                  propertyId={data.property?.id}
+                  seller_id={data.property?.user?.id}
                   seller_type={data.property?.user?.type}
                   isWished={
                     data.property?.userwishlists?.length > 0 &&

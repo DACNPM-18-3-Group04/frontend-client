@@ -20,7 +20,7 @@ export default function useUploadImage() {
   ) => {
     UploadFileAPI.uploadPropertyImage(propertyId, formData)
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         const data = res.data.data;
         localAddImage(data.id, data.image_link);
         toast.success('cập nhật thành công');

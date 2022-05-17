@@ -14,7 +14,9 @@ export default function PropertyDetail({
   certificate,
   description,
   property_type,
+  seller_id,
   seller_type,
+  propertyId,
 }) {
   return (
     <Box sx={sx}>
@@ -25,6 +27,8 @@ export default function PropertyDetail({
         price={price}
         area={area}
         isWished={isWished}
+        sellerId={seller_id}
+        propertyId={propertyId}
       />
 
       <PropertyDetailBody
