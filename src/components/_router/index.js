@@ -1,6 +1,6 @@
 import { Route, Switch } from 'react-router-dom';
 import AuthOnlyRoute from './customRoute/authOnlyRoute';
-// import NonAuthOnlyRoute from './customRoute/nonAuthOnlyRoute';
+import NonAuthOnlyRoute from './customRoute/nonAuthOnlyRoute';
 
 // Pages
 import NotFoundPage from '../_pages/notfound';
@@ -13,7 +13,8 @@ import PropertySearchPage from '../_pages/search';
 import MyAd from '../_pages/myad';
 import PropertyUpdatePage from '../_pages/propertyUpdate';
 import MyContactList from '../_pages/myContactList';
-
+import PasswordForgotPage from '../_pages/passwordForgot';
+import PasswordResetPage from '../_pages/passwordReset';
 // Pages
 
 function Router() {
@@ -49,6 +50,12 @@ function Router() {
       <AuthOnlyRoute exact path='/contact/me'>
         <MyContactList />
       </AuthOnlyRoute>
+      <NonAuthOnlyRoute exact path='/password/forgot'>
+        <PasswordForgotPage />
+      </NonAuthOnlyRoute>
+      <NonAuthOnlyRoute exact path='/password/reset'>
+        <PasswordResetPage />
+      </NonAuthOnlyRoute>
       <Route>
         <NotFoundPage />
       </Route>
