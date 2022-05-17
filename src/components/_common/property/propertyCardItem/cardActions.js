@@ -18,6 +18,8 @@ export default function PropertyCardActions({
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'flex-end',
+        position: 'absolute',
+        'z-index': 10000,
       }}
     >
       {displayEdit && (
