@@ -18,7 +18,7 @@ export default function PropertyListItem({
   property = {
     id: '',
     title: '',
-    image: [],
+    images: [],
     description: '',
     price: 0,
     area: 0,
@@ -44,8 +44,8 @@ export default function PropertyListItem({
   },
 }) {
   const imageURL =
-    property.image && property.image.length > 0
-      ? property.image[0]
+    property.images && property.images.length > 0
+      ? property.images[0].image_link
       : 'https://via.placeholder.com/300?text=No+image';
   const createdAtDateTime =
     property.createdAt && property.createdAt !== ''

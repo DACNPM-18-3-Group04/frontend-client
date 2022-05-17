@@ -2,10 +2,14 @@
 // COMMENTED LINES ARE FOR WISHLIST FEATURES
 // THAT ARE DISABLED DUE TO LACK OF TIME & RESOURCES
 import {
-  // Card, IconButton,
+  // Card,
+  Paper,
+  IconButton,
   Typography,
 } from '@mui/material';
 import { Box } from '@mui/system';
+import EditIcon from '@mui/icons-material/Edit';
+import { Link } from 'react-router-dom';
 // import FavoriteIcon from '@mui/icons-material/Favorite';
 // import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { useEffect, useState } from 'react';
@@ -23,6 +27,8 @@ export default function PropertyDetailHeader({
   price,
   area,
   isWished,
+  sellerId = '',
+  propertyId = '',
 }) {
   // eslint-disable-next-line no-unused-vars
   const [favorite, setFavorite] = useState(false);
@@ -37,6 +43,10 @@ export default function PropertyDetailHeader({
     };
   }, [isWished, user]);
 
+  let isSeller = false;
+  if (user.isLogin) {
+    isSeller = `${sellerId}` === `${user.id}`;
+  }
   // const handleToggleWished = () => {
   //   handleChangeWishedState(id)
   //     .then((res) => {
@@ -78,6 +88,20 @@ export default function PropertyDetailHeader({
             m&sup2;
           </Typography>
         </Box>
+      </Box>
+      <Box>
+        {isSeller && (
+          <Paper>
+            <IconButton
+              component={Link}
+              to={`/property/update/${propertyId}`}
+              target='_blank'
+              rel='noopener noreferrer'
+            >
+              <EditIcon />
+            </IconButton>
+          </Paper>
+        )}
       </Box>
 
       {/* {user.id && (

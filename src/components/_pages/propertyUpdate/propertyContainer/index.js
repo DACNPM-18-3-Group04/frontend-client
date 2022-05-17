@@ -33,6 +33,7 @@ export default function PropertyUpdateContainer({
           throw new Error(result.data.message);
         }
         const data = result.data.data;
+        // console.log(data);
         const property = formatResponseData(data.property);
 
         if (!property.author_id || property.author_id !== user.id) {
@@ -71,6 +72,7 @@ export default function PropertyUpdateContainer({
         price={property.price || 0}
         area={property.area || 0}
         propertyStatus={property.propertyStatus || PropertyStatus.DEFAULT}
+        images={property.images || []}
       />
     </>
   );

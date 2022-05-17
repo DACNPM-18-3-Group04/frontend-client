@@ -12,9 +12,11 @@ export default function PropertyDetail({
   area,
   isWished,
   certificate,
-  discription,
+  description,
   property_type,
+  seller_id,
   seller_type,
+  propertyId,
 }) {
   return (
     <Box sx={sx}>
@@ -25,11 +27,13 @@ export default function PropertyDetail({
         price={price}
         area={area}
         isWished={isWished}
+        sellerId={seller_id}
+        propertyId={propertyId}
       />
 
       <PropertyDetailBody
         certificate={certificate}
-        discription={discription}
+        description={description}
         address={address}
         district={district || {}}
         province={province || {}}

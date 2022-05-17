@@ -9,6 +9,8 @@ import {
   Box,
   Typography,
 } from '@mui/material';
+import OpenInNewIcon from '@mui/icons-material/OpenInNew';
+import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
 import PropertyAPI from '../../../../helpers/api/property';
@@ -20,6 +22,7 @@ import { useFormik } from 'formik';
 import PropertyTypes from '../../../../helpers/constants/propertyTypes';
 import formatErrorResponse from '../../../../helpers/utils/formatErrorResponse';
 import PropertyStatus from '../../../../helpers/constants/propertyStatus';
+import PropertyImage from '../updateImage';
 
 const validationSchema = yup.object({
   title: yup
@@ -47,6 +50,7 @@ export default function UpdatePropertyForm({
   price = 0,
   area = 0,
   propertyStatus = PropertyStatus.DEFAULT,
+  images = [],
 }) {
   const propertyLocations = useSelector(selectPropertyLocation);
   const districts = [...propertyLocations.districts] || [];
@@ -98,7 +102,8 @@ export default function UpdatePropertyForm({
             </Typography>
           </Grid>
           <Grid item xs={12} md={9}>
-            <Paper>
+            <PropertyImage propertyId={propertyId} images={images} />
+            <Paper sx={{ marginTop: 2 }}>
               <Box padding={2}>
                 <Grid container spacing={1}>
                   <Grid item xs={12}>
@@ -270,6 +275,18 @@ export default function UpdatePropertyForm({
               >
                 {loading ? <CircularProgress color='inherit' /> : 'Cập nhật'}
               </Button>
+              <Box mt={2}>
+                <Button
+                  fullWidth
+                  component={Link}
+                  to={`/property/${propertyId}`}
+                  target='_blank'
+                  rel='noopener noreferrer'
+                >
+                  <OpenInNewIcon />
+                  Trang tin rao
+                </Button>
+              </Box>
             </Paper>
           </Grid>
         </Grid>

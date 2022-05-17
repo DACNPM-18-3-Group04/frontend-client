@@ -4,7 +4,7 @@ import { getPropertyTypeName } from '../../../../helpers/constants/propertyTypes
 import { cellStyle, rowStyle, tableContainer } from '../styleObj';
 
 export default function PropertyDetailBody({
-  discription,
+  description,
   property_type,
   seller_type,
   certificate,
@@ -47,7 +47,7 @@ export default function PropertyDetailBody({
         <Typography
           fontSize='.8rem'
           dangerouslySetInnerHTML={{
-            __html: discription ? discription : '<p>Không có mô tả</p>',
+            __html: description ? description : '<p>Không có mô tả</p>',
           }}
         />
       </Box>

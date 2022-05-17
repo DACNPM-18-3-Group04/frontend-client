@@ -30,6 +30,7 @@ export default function PropertySingle() {
           if (res.data.success === false) {
             throw new Error(res.data.message);
           }
+          // console.log(res.data.data);
           setData(res.data.data);
           setLoading(false);
         })
@@ -62,7 +63,7 @@ export default function PropertySingle() {
                     borderRadius: 1,
                     border: '4px solid #212121',
                   }}
-                  imgs={data.property?.imgs}
+                  imgs={data.property?.images}
                 />
               }
             />
@@ -78,8 +79,10 @@ export default function PropertySingle() {
                   price={data.property?.price}
                   area={data.property?.area}
                   certificate={data.property?.certificate}
-                  discription={data.property?.discription}
+                  description={data.property?.description}
                   property_type={data.property?.type}
+                  propertyId={data.property?.id}
+                  seller_id={data.property?.user?.id}
                   seller_type={data.property?.user?.type}
                   isWished={
                     data.property?.userwishlists?.length > 0 &&
