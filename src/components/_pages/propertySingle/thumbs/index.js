@@ -34,7 +34,7 @@ export default function ThumbSlider({ sx, imgs }) {
         {imgs?.length > 0 ? (
           imgs.map((img) => (
             <SwiperSlide key={img.id}>
-              <img alt={img.id} src={img.ImageLink} />
+              <img alt={img.id} src={img.image_link} />
             </SwiperSlide>
           ))
         ) : (
@@ -58,7 +58,7 @@ export default function ThumbSlider({ sx, imgs }) {
         {imgs?.length > 0 ? (
           imgs.map((img) => (
             <SwiperSlide key={img.id}>
-              <img alt={img.id} src={img.ImageLink} />
+              <img alt={img.id} src={img.image_link} />
             </SwiperSlide>
           ))
         ) : (

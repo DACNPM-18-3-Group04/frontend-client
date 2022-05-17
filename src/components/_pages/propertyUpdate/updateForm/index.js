@@ -22,6 +22,7 @@ import { useFormik } from 'formik';
 import PropertyTypes from '../../../../helpers/constants/propertyTypes';
 import formatErrorResponse from '../../../../helpers/utils/formatErrorResponse';
 import PropertyStatus from '../../../../helpers/constants/propertyStatus';
+import PropertyImage from '../updateImage';
 
 const validationSchema = yup.object({
   title: yup
@@ -49,6 +50,7 @@ export default function UpdatePropertyForm({
   price = 0,
   area = 0,
   propertyStatus = PropertyStatus.DEFAULT,
+  images = [],
 }) {
   const propertyLocations = useSelector(selectPropertyLocation);
   const districts = [...propertyLocations.districts] || [];
@@ -100,7 +102,8 @@ export default function UpdatePropertyForm({
             </Typography>
           </Grid>
           <Grid item xs={12} md={9}>
-            <Paper>
+            <PropertyImage propertyId={propertyId} images={images} />
+            <Paper sx={{ marginTop: 2 }}>
               <Box padding={2}>
                 <Grid container spacing={1}>
                   <Grid item xs={12}>

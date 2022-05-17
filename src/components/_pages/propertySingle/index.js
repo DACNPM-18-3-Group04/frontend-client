@@ -62,7 +62,7 @@ export default function PropertySingle() {
                     borderRadius: 1,
                     border: '4px solid #212121',
                   }}
-                  imgs={data.property?.imgs}
+                  imgs={data.property?.images}
                 />
               }
             />

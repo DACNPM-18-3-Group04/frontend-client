@@ -14,6 +14,7 @@ export default function formatResponseData(propertyDataFromResponse = {}) {
     price: responseData.price || 0,
     area: responseData.area || 0,
     propertyStatus: responseData.status || PropertyStatus.DEFAULT,
+    images: responseData.images || [],
   };
 
   return propertyData;
