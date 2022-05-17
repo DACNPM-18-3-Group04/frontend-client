@@ -23,7 +23,7 @@ export default function useUploadImage() {
         // console.log(res.data);
         const data = res.data.data;
         localAddImage(data.id, data.image_link);
-        toast.success('cập nhật thành công');
+        toast.success('Cập nhật thành công');
         onSuccess();
       })
       .catch((err) => {
