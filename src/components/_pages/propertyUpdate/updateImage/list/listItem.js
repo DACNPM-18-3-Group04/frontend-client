@@ -1,4 +1,5 @@
-import { ImageListItem } from '@mui/material';
+import { ImageListItem, ImageListItemBar } from '@mui/material';
+import ListItemRemoveButton from './removeItemButton';
 
 export default function ListItem({ imageLink, imageId }) {
   return (
@@ -9,6 +10,7 @@ export default function ListItem({ imageLink, imageId }) {
         alt={imageId}
         loading='lazy'
       />
+      <ImageListItemBar actionIcon={<ListItemRemoveButton id={imageId} />} />
     </ImageListItem>
   );
 }

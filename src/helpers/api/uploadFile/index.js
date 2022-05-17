@@ -24,10 +24,21 @@ export const uploadPropertyImage = async (propertyId = '', formData) => {
   );
 };
 
+export const removePropertyImage = async (propertyId = '', imageId = '') => {
+  const config = getAuthConfig();
+  const data = {
+    propertyId,
+    imageId,
+  };
+
+  return api.post(`${baseURL}/property-image/remove`, data, config);
+};
+
 const UploadFileAPI = {
   // uploadFile,
   uploadAvatar,
   uploadPropertyImage,
+  removePropertyImage,
 };
 
 export default UploadFileAPI;
